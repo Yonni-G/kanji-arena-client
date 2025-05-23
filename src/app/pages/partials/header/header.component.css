@@ -1,0 +1,22 @@
+.logo-shadow {
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    /* même rouge que btn-danger */
+    border-radius: 6px;
+}
+
+.btn {
+    display: inline-block;
+    /* Permet au bouton de s'adapter au contenu */
+    width: fit-content;
+    /* Ajuste la largeur en fonction du texte */
+    white-space: nowrap;
+    /* Empêche le texte de se diviser sur plusieurs lignes */
+    text-align: center;
+    /* Centre le texte dans le bouton */
+    padding: 10px 20px;
+    /* Ajoute un espace autour du texte */
+    font-size: 16px;
+    /* Ajuste la taille du texte */
+    line-height: 1.5;
+    /* Ajuste l'espacement entre les lignes */
+}

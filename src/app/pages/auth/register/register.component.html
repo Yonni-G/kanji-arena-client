@@ -1,0 +1,75 @@
+<main class="container my-5">
+    <!-- Section Hero -->
+    <section class="text-center">
+        <h1 class="fw-bold text-danger">Inscription</h1>
+        <p class="text-muted">Créez votre compte et rejoignez notre communauté passionnée par la culture japonaise.</p>
+    </section>
+
+    <!-- Section Formulaire -->
+    <section class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <form (submit)="onSubmit()" [formGroup]="form">
+                <div class="mb-3">
+                    <label for="username" class="form-label fw-bold text-danger">Choisissez un pseudo</label>
+                    <input formControlName="username" type="text" id="username" name="username" class="form-control"
+                        placeholder="Choisissez un pseudo" required>
+                    @if(form.get("username")?.touched &&
+                    form.get("username")?.invalid) {
+                    @if(form.get('username')?.hasError('pattern')) {
+                    <small class="text-danger fst-italic">Votre pseudo doit contenir de 3 à 12 caractères alphanumériques</small>
+                    } }
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold text-danger">Votre adresse email</label>
+                    <input formControlName="email" type="text" id="email" name="email" class="form-control"
+                        placeholder="Votre adresse email" required>
+                    @if(form.get("email")?.touched &&
+                    form.get("email")?.invalid) {
+                    @if(form.get('email')?.hasError('pattern')) {
+                    <small class="text-danger fst-italic">Saisissez une adresse email correcte</small>
+                    } }
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold text-danger">Mot de passe</label>
+                    <input formControlName="password" type="password" id="password" name="password" class="form-control"
+                        placeholder="Entrez votre mot de passe" required>
+                        @if(form.get("password")?.touched &&
+                    form.get("password")?.invalid) {
+                    @if(form.get('password')?.hasError('pattern')) {
+                    <small class="text-danger fst-italic">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+                    } }
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label fw-bold text-danger">Confirmez le mot de
+                        passe</label>
+                    <input formControlName="confirmPassword" type="password" id="confirmPassword" name="confirmPassword"
+                        class="form-control" placeholder="Confirmez votre mot de passe" required>
+                        @if(form.get("confirmPassword")?.touched &&
+                        form.get("confirmPassword")?.invalid) {
+                        @if(form.get('confirmPassword')?.hasError('confirmPassword')) {
+                        <small class="text-danger fst-italic">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+                        } }
+                        @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
+                            <small class="text-danger fst-italic">Les mots de passe ne correspondent pas.</small>
+                          }
+                    
+                </div>
+                <div class="text-center mt-4">
+                    <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold">
+                        @if (!loading) {
+                        Je m'inscris sur Kanji-Master
+                        } @else {
+                        <span class="spinner"></span> Chargement...
+                        }
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Section Call-To-Action -->
+    <section class="text-center mt-5">
+        <p class="text-muted">Déjà inscrit ?</p>
+        <a routerLink="/login" routerLinkActive="active" class="btn btn-outline-danger fw-bold">Se connecter</a>
+    </section>
+</main>

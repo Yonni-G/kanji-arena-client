@@ -1,0 +1,10 @@
+/* Style général pour les cartes Kanji */
+
+/* on surgage styles.css */
+
+.choice {
+    height: 150px;
+    /* Augmente la hauteur des cartes */
+    font-size: 5rem;
+
+}

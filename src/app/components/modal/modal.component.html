@@ -1,0 +1,13 @@
+@if (isOpen) {
+<div class="modal-backdrop" (click)="onClose()"></div>
+
+<div class="ma-modal">
+    <div class="modal-header">
+        <h5>{{ title }}</h5>
+        <button class="close-button" (click)="onClose()">×</button>
+    </div>
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+</div>
+}

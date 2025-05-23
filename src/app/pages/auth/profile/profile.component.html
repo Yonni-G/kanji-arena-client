@@ -1,0 +1,29 @@
+<section class="container mt-4 mb-5 text-left">
+    <div class="mb-4">
+        <h2 class="fw-bold text-danger display-4">Votre profil</h2>
+    </div>
+
+    <div class="mb-4">
+        <h5 class="fw-semibold mb-3">Alertes par mail : Score battu</h5>
+
+        <p class="text-muted fst-italic text-justify mb-2">
+            Pour créer de l'engagement et stimuler la compétition, vous pouvez recevoir un email dès lors qu’un autre joueur
+            battera votre meilleur score sur un des jeux de Kanj-Master. Cette fonctionnalité s’applique <strong>uniquement aux 10 premiers joueurs des différents classements</strong>.
+            <br />
+        </p>
+        <p class="text-muted fst-italic text-justify mb-0">
+            Vous pouvez l’activer ou la désactiver ci-dessous :
+        </p>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+        <mat-slide-toggle [checked]="isActive" (change)="onToggle($event)" color="primary">&nbsp;
+            @if (!isActive) {
+            Je ne souhaite pas être alerté par email dès lors qu’un autre joueur bat mon meilleur score
+            (si je fais partie du TOP 10)
+            } @else {
+            Je souhaite être alerté par email dès lors qu'un autre joueur bat mon meilleur score
+            }
+        </mat-slide-toggle>
+    </div>
+</section>

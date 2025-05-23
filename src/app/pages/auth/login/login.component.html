@@ -1,0 +1,59 @@
+<main class="container my-5">
+    <!-- Section Hero -->
+    <section class="text-center">
+        <h1 class="fw-bold text-danger">Connexion</h1>
+        <p class="text-muted">Connectez-vous pour accéder à votre compte et profiter pleinement de notre communauté
+            passionnée par la culture japonaise.</p>
+    </section>
+
+    <!-- Section Formulaire -->
+    <section class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <form (submit)="onSubmit()" [formGroup]="form">
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold text-danger">Adresse email</label>
+                    <input formControlName="email" type="text" id="email" name="email" class="form-control"
+                        placeholder="Votre adresse email" required>
+                    @if(form.get("email")?.touched &&
+                    form.get("email")?.invalid) {
+                    @if(form.get('email')?.hasError('pattern')) {
+                    <small class="text-danger fst-italic">Saisissez une adresse email correcte</small>
+                    } }
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold text-danger">Mot de passe</label>
+                    <input formControlName="password" type="password" id="password" name="password" class="form-control"
+                        placeholder="Entrez votre mot de passe" required>
+                    @if(form.get("password")?.touched &&
+                    form.get("password")?.invalid) {
+                    @if(form.get('password')?.hasError('pattern')) {
+                    <small class="text-danger fst-italic">Le mot de passe doit contenir au moins 8 caractères, une
+                        majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+                    } }
+                </div>
+                <div class="text-center mt-4">
+                    <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold">
+                        @if (!loading) {
+                        Connexion 
+                        } @else {
+                        <span class="spinner"></span> Chargement...
+                        }
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Section Call-To-Action -->
+    <section class="text-center mt-5">
+        <p class="text-muted">Pas encore inscrit ?</p>
+        <a routerLink="/register" routerLinkActive="active" class="btn btn-outline-danger fw-bold">Créer un compte</a>
+    </section>
+
+    <!-- Section Mot de passe oublié -->
+    <section class="text-center mt-3">
+        <a [routerLink]="['/forgot-password']" routerLinkActive="active" class="text-danger fw-bold">Mot de passe oublié ?</a>
+    </section>
+
+</main>

@@ -1,0 +1,55 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Sawarabi Mincho", sans-serif; }
+
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #ccc;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.nav-link.active {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Style général pour les cartes Kanji */
+.choice {
+    border: 1px solid #ccc;
+    /* Bordure par défaut */
+    border-radius: 10px;
+    /* Arrondi des coins */
+    background-color: #f8f9fa;
+    /* Fond gris clair */
+/*    transition: all 0.2s ease-in-out;*/
+    /* Animation fluide */
+}
+
+/* Effet de survol */
+.choice:hover {
+    background-color: #e9ecef;
+    /* Fond légèrement plus foncé au survol */
+    border-color: #3b3d41;
+    /* Bordure bleue au survol */
+}
+
+.correctAnswer {
+    background-color: rgba(var(--bs-success-rgb), 0.2);
+    /* Vert clair transparent */
+}
+
+.unCorrectAnswer {
+    background-color: rgba(var(--bs-danger-rgb), 0.2);
+    /* Rouge clair transparent */
+}

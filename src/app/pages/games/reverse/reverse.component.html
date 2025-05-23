@@ -1,0 +1,31 @@
+
+        <!-- Body -->
+        <div class="card-body text-center">
+            <!-- SENS AFFICHÉ EN GROS, MAJUSCULE -->
+            <div class="fw-bold text-uppercase text-dark" style="font-size: 2rem;">
+                {{ card?.proposal || "JOUER" }}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer">
+            <div class="d-flex flex-column flex-md-row flex-wrap justify-content-between gap-2">
+                @if(card?.choices) {
+                @if(loadingCheckState == 'disabled') {
+                @for(choice of card?.choices; track $index) {
+                <button (click)="onCheck($index, card)" type="button"
+                    class="btn choice flex-fill"
+                    >
+                    {{ choice.label }}
+                </button>
+                }
+                }
+                @if(loadingCheckState == 'enabled') {
+                <div class="w-100 py-3 d-flex justify-content-center align-items-center">
+                    <div class="spinner-border text-danger" aria-hidden="true"></div>
+                    <span class="ms-2">Vérification...</span>
+                </div>
+                }
+                }
+            </div>
+        </div>

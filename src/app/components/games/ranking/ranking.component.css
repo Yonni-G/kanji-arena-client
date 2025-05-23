@@ -1,0 +1,6 @@
+table tr.user-best,
+table tr.user-best td {
+    background-color: #28a745 !important;
+    color: white !important;
+    font-weight: bold;
+}
