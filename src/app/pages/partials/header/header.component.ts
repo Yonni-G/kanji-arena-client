@@ -29,10 +29,4 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  protected(event: Event) {
-    event.preventDefault(); // Empêche le comportement par défaut du lien
-    this.apiService.getTestProtected().subscribe((response) => {
-      //console.log('Réponse protégée:', response);
-    });
-  }
 }

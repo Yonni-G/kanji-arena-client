@@ -22,16 +22,6 @@ export class ApiAuthService {
     );
   }
 
-  // on interroge l'api pour savoir si le refreshToken existe et est valide
-  checkRefreshToken(): Observable<any> {
-    return this.http.get<any>(
-      `${environment.apiUrl}/users/check-refresh-token`,
-      {
-        withCredentials: true,
-      }
-    );
-  }
-
   // on interroge l'api pour savoir si le resetoken existe et est valide
   checkResetToken(resetToken: string): Observable<any> {
     return this.http.post<any>(
@@ -41,19 +31,6 @@ export class ApiAuthService {
         withCredentials: true,
       }
     );
-  }
-
-  // Méthode pour récupérer le message depuis la route /test
-  getTestMessage(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/users/test`, {
-      withCredentials: true,
-    });
-  }
-
-  getTestProtected(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/users/protected`, {
-      withCredentials: true,
-    });
   }
 
   forgotPassword(user: User): Observable<any> {
@@ -76,15 +53,6 @@ export class ApiAuthService {
     return this.http.post<any>(`${environment.apiUrl}/users/login`, user, {
       withCredentials: true,
     });
-  }
-
-  // Méthode pour se déconnecter
-  logout(): Observable<any> {
-    return this.http.post<any>(
-      `${environment.apiUrl}/users/logout`,
-      {},
-      { withCredentials: true }
-    );
   }
 
   resetPassword(
