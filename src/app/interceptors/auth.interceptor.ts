@@ -43,7 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (accessToken && this.jwtHelper.isTokenExpired(accessToken)) {
       this.messageService.setMessage({
         text: "Votre session a expiré, il est temps de vous reconnecter :)",
-        type: "info"        
+        type: "info"
       })
       this.authService.logout();
       this.router.navigate(['/login']);

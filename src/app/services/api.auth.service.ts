@@ -20,6 +20,15 @@ export class ApiAuthService {
         withCredentials: true,
       }
     );
+  }  
+
+  getAlertOutOfRanking() {
+  return this.http.get<any>(
+    `${environment.apiUrl}/users/get-alert-out-of-ranking`,
+    {
+      withCredentials: true,
+    }
+  );
   }
 
   // on interroge l'api pour savoir si le resetoken existe et est valide

@@ -81,7 +81,7 @@
 
 <app-list-errors [gameMode]="gameMode"></app-list-errors>
 
-<app-modal [title]="'🎉 Bravo ! Partie terminée ! 🎉'" [isOpen]="showModal" (close)="closeModal()">
+<app-modal [title]="'🎉 Bravo ! Partie terminée !'" [isOpen]="showModal" (close)="closeModal()">
     @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
 
     <div class="text-center px-3">
@@ -92,13 +92,15 @@
             <p class="text-muted mb-0">Erreurs : {{ counters.errors }} | Total tentatives : {{ counters.total }}</p>
         </div>
 
-        <!-- Chrono -->
-        <div class="my-3">
-            <h5 class="text-primary">Temps réalisé :</h5>
-            <div class="fs-3 text-danger fw-semibold">
-                {{ userLiveChrono.chronoValue / 1000 | chronoFormat }}
+        @if(userLiveChrono.chronoValue != null) {
+            <!-- Chrono -->
+            <div class="my-3">
+                <h5 class="text-primary">Temps réalisé :</h5>
+                <div class="fs-3 text-danger fw-semibold">
+                    {{ userLiveChrono.chronoValue / 1000 | chronoFormat }}
+                </div>
             </div>
-        </div>
+        }
 
         <!-- Classement -->
         @if (userLiveChrono.ranking != null) {

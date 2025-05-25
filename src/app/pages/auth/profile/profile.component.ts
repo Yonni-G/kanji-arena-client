@@ -10,7 +10,7 @@ import { MessageService } from '../../../services/message.service';
 })
 export class ProfileComponent {
   private readonly messageService: MessageService = inject(MessageService);
-  isActive = false;
+  alertOutOfRanking = false;
 
   constructor(private readonly apiAuthService: ApiAuthService) {}
 
@@ -23,20 +23,26 @@ export class ProfileComponent {
           text: response.message,
           type: 'success',
         });
-        this.isActive = newValue;
+        this.alertOutOfRanking = newValue;
       },
       error: (err) => {
         console.error('Erreur lors de la mise à jour', err);
-        this.messageService.setMessage({
-          text: err.error.message,
-          type: 'error',
-        });
       },
     });
   }
 
   ngOnInit() {
     // on va interroger notre API pour obtenir le alertOutOfRanking de notre user
-    //this.apiAuthService.
+    this.apiAuthService.getAlertOutOfRanking().subscribe({
+      next: (response) => {
+        this.alertOutOfRanking = response.alertOutOfRanking;
+      },
+      error: (err) => {
+        console.error(
+          'Erreur lors de la récupuration de alertOutOfRanking',
+          err
+        );
+      },
+    });
   }
 }
