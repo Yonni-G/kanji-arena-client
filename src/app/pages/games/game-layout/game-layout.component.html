@@ -1,30 +1,32 @@
-<section class="container text-center">
+<section class="text-center mb-4">
     <div class="m-4">
-        <h2 class="fw-bold text-danger display-4 ">
+        <h2 class="fw-bold text-danger display-4">
             <i class="bi bi-lightning-charge-fill text-warning"></i>
             {{ gameName }} <span class="text-dark">mode</span>
         </h2>
-    
         <div class="subtitle-highlight">
             <i class="bi bi-stars text-warning me-2"></i>
             {{ gameDesc }}
         </div>
     </div>
-    
-    <p></p>
-    @if (!authService.isAuthenticated()) {
-    <div class="alert alert-warning d-inline-flex align-items-center align-items-center gap-2 m-2 small" style="max-width: 28rem; margin: auto;">
-        <i class="bi bi-exclamation-triangle-fill fs-5"></i>
-        <span>Vous n'êtes pas connecté·e !<br /> Vos chronos ne seront pas enregistrés !</span>
-    </div>
-    }
 </section>
 
-<app-ranking [gameMode]="gameMode!"></app-ranking>
+<div class="container game-width">
+    @if (!authService.isAuthenticated()) {
+    <!-- Alerte si non connecté -->
+    <section class="text-center">
+        <div class="alert alert-warning small p-0">
+            <i class="bi bi-exclamation-triangle-fill fs-5 me-2"></i>
+            <span>Vous n'êtes pas connecté·e !<br /> Vos chronos ne seront pas enregistrés !</span>
+        </div>
+    </section>
+    }
 
-<section class="container text-center">
-    @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
-        <div class="alert alert-success d-inline-flex align-items-center gap-2 px-4 py-2 mt-3 rounded-pill" style="max-width: 28rem;">
+    <app-ranking [gameMode]="gameMode!"></app-ranking>
+
+    <section>
+        @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
+        <div class="alert alert-success d-inline-flex align-items-center gap-2 px-4 py-2 mt-3 rounded-pill">
             <i class="bi bi-stopwatch-fill fs-5 align-middle"></i>
             <span class="fw-semibold">
                 Votre chrono : <span class="text-dark">{{ userLiveChrono!.chronoValue / 1000 | chronoFormat }}</span>
@@ -34,15 +36,13 @@
                 Classement : #<span class="text-dark">{{ userLiveChrono!.ranking }}</span>
             </span>
         </div>
-        
-    }
-</section>
+        }
+    </section>
 
-<!-- PARTIE HAUTE D'UN JEU -->
-<div class="container my-2">
+    <!-- PARTIE HAUTE D'UN JEU -->
     <!-- Card -->
-    <div id="quiz-card" class="card mx-auto" [ngClass]="feedbackClass()"
-        style="max-width: 28rem; border: 1px solid #ccc; border-radius: 10px;">
+    <div id="quiz-card" class="card game-width" [ngClass]="feedbackClass()"
+        style="border: 1px solid #ccc; border-radius: 10px;">
         <!-- Header -->
         <div class="card-header text-center p-2">
             <!-- Counters -->
@@ -52,7 +52,6 @@
                     style="width: 80px; height: 80px;">
                     {{ counters.success }}/10
                 </div>
-
                 <!-- Other Counters -->
                 <div class="d-flex flex-column text-end ms-auto">
                     <span class="badge bg-danger mb-1" style="font-size: 0.9rem;"><i class="bi bi-x-octagon-fill"></i>
@@ -61,15 +60,12 @@
                         counters.total }}</span>
                 </div>
             </div>
-
             <!-- Separator -->
             <hr style="border-top: 1px solid #ccc; margin: 0.3rem 0;">
-
             <!-- Chronometer -->
             <div class="mt-2 mb-2">
                 <app-chronometer></app-chronometer>
             </div>
-
             <!-- Restart Button -->
             <button type="button" (click)="onStart()" class="btn btn-outline-danger fw-bold w-100">
                 @if(isLoading) {
@@ -81,26 +77,20 @@
                 {{ card ? "Arrêter la partie !" : "Démarrer la partie !" }}
                 }
             </button>
-
         </div>
         <router-outlet></router-outlet>
     </div>
 </div>
 
-
 <app-list-errors [gameMode]="gameMode"></app-list-errors>
 
 <app-modal [title]="'🎉 Bravo ! Partie terminée !'" [isOpen]="showModal" (close)="closeModal()">
     @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
-
     <div class="text-center px-3">
-
         <!-- Score -->
         <div class="my-3">
-
             <p class="text-muted mb-0">Erreurs : {{ counters.errors }} | Total tentatives : {{ counters.total }}</p>
         </div>
-
         @if(userLiveChrono.chronoValue != null) {
         <!-- Chrono -->
         <div class="my-3">
@@ -110,7 +100,6 @@
             </div>
         </div>
         }
-
         <!-- Classement -->
         @if (userLiveChrono.ranking != null) {
         <div class="my-3">
@@ -118,7 +107,6 @@
             <div class="fs-4 fw-bold text-dark">#{{ userLiveChrono.ranking }}</div>
         </div>
         }
-
         <!-- Message de non-authentification -->
         @if (!authService.isAuthenticated()) {
         <div class="alert alert-warning d-flex align-items-center justify-content-center gap-2 mt-3">
@@ -126,7 +114,6 @@
             <span>Connectez-vous pour enregistrer vos scores !</span>
         </div>
         }
-
         <!-- Boutons -->
         <div class="mt-4 d-flex flex-column gap-2">
             <button class="btn btn-secondary" (click)="closeModal()">

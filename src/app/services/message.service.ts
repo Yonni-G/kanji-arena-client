@@ -16,7 +16,7 @@ export class MessageService {
   currentMessage = this.messageSource.asObservable();
 
   setMessage(message: Message, clearAfter: number = 3000) {
-    this.messageSource.next({ message, clearAfter }); // Emit un objet avec le message et le délai
+    this.messageSource.next({ message, clearAfter }); // Emet un objet avec le message et le délai
   }
 
   clearMessage() {

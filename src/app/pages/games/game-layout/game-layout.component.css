@@ -1,4 +1,6 @@
-.title-glow {
-    text-shadow: 0 2px 16px #dc354588, 0 1px 0 #fff;
-    letter-spacing: 1px;
+.game-width {
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }

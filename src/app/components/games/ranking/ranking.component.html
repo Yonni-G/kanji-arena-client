@@ -1,79 +1,92 @@
 <!-- Si best chrono utilisateur, on l'affiche ici -->
-@if (userBestChrono) {
-    <div class="alert alert-light border border-danger mx-auto m-2 text-center w-100 d-flex flex-wrap align-items-center justify-content-center gap-2"
-        style="max-width: 28rem;">
-        <i class="bi bi-stopwatch me-2 text-danger fs-4"></i>
-        <span>
-            Votre meilleur chrono :
-            <strong class="text-danger">{{ userBestChrono.chronoValue / 1000 | chronoFormat }}</strong>
-            <span class="mx-2 text-secondary">|</span>
-            Rang :
-            <strong class="text-dark">#{{ userBestChrono.ranking }}<small class="text-muted"> (/{{ metrics.totalChronos
-                    }})</small></strong>
-        </span>
-    
-        @if (userBestChrono.ranking === 1) {
-        <span class="badge bg-warning text-dark ms-2 d-flex align-items-center">
-            <i class="bi bi-trophy-fill me-1"></i>
-            Félicitations, vous êtes 1er ! 🥇
-        </span>
-        }
-        @else if (userBestChrono.ranking === 2) {
-        <span class="badge bg-secondary text-white ms-2 d-flex align-items-center">
-            <i class="bi bi-trophy-fill me-1"></i>
-            Bravo, vous êtes 2ème ! 🥈
-        </span>
-        }
-        @else if (userBestChrono.ranking === 3) {
-        <span class="badge bg-dark text-warning ms-2 d-flex align-items-center">
-            <i class="bi bi-trophy-fill me-1"></i>
-            Bien joué, vous êtes 3ème ! 🥉
-        </span>
-        }
+@if (userBestChrono) {<div class="alert alert-light border border-danger mx-auto my-3 py-3 px-4 text-center w-100" style="max-width: 480px;">
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-stopwatch text-danger fs-3"></i>
+            <span class="fw-semibold">
+                Votre meilleur chrono :
+                <span class="text-danger fs-5">{{ userBestChrono.chronoValue / 1000 | chronoFormat }}</span>
+            </span>
+        </div>
+        <span class="vr d-none d-md-block mx-3" style="height: 40px;"></span>
+        <div class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">
+                Rang :
+                <span class="text-dark fs-5">#{{ userBestChrono.ranking }}</span>
+                <small class="text-muted">/ {{ metrics.totalChronos }}</small>
+            </span>
+            @if (userBestChrono.ranking === 1) {
+            <span
+                class="badge bg-warning text-dark ms-2 d-flex align-items-center px-3 py-2 shadow-lg border border-3 border-warning"
+                style="font-size: 1.4rem;">
+                <i class="bi bi-trophy-fill me-2 fs-3 text-warning"></i>
+                1<sup>er</sup> 🥇
+            </span>
+            }
+            @else if (userBestChrono.ranking === 2) {
+            <span
+                class="badge bg-secondary text-white ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-secondary"
+                style="font-size: 1.2rem;">
+                <i class="bi bi-trophy-fill me-2 fs-4 text-white"></i>
+                2<sup>ème</sup> 🥈
+            </span>
+            }
+            @else if (userBestChrono.ranking === 3) {
+            <span
+                class="badge bg-dark text-warning ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-dark"
+                style="font-size: 1.1rem;">
+                <i class="bi bi-trophy-fill me-2 fs-4 text-warning"></i>
+                3<sup>ème</sup> 🥉
+            </span>
+            }
+        </div>
     </div>
-    
+</div>
+
 }
 
 <!-- Classement général -->
 @if (chronos?.length) {
-<div class="card shadow-sm mx-auto" style="max-width: 28rem;">
-    <button class="card-header d-flex justify-content-between align-items-center bg-light w-100 border-0 text-start"
-        type="button" data-bs-toggle="collapse" data-bs-target="#classementTable" aria-expanded="false"
-        aria-controls="classementTable">
-        <span><i class="bi bi-list-ol me-2"></i>Classement général<small> • {{ metrics.nbLimitRanking }} premiers</small></span>
-        <i class="bi bi-chevron-down"></i>
-    </button>
+<div class="container mb-2 my-0 p-0">
+    <div class="card shadow-sm">
+        <button class="card-header d-flex justify-content-between align-items-center bg-light border-0 text-start"
+            type="button" data-bs-toggle="collapse" data-bs-target="#classementTable" aria-expanded="false"
+            aria-controls="classementTable">
+            <span><i class="bi bi-list-ol me-2"></i>Classement général<small> • {{ metrics.nbLimitRanking }}
+                    premiers</small></span>
+            <i class="bi bi-chevron-down"></i>
+        </button>
 
+        <div id="classementTable" class="collapse hide">
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-sm mb-0 text-center">
+                    <thead class="table-light sticky-top">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Temps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (c of chronos; let i = $index; track c.ranking) {
+                        <tr [class.user-best]="userBestChrono?.username === c.username && userBestChrono?.chronoValue === c.chronoValue"
+                            [class.table-light]="i % 2 === 0" [class.table-white]="i % 2 === 1">
+                            <td>
+                                @if (i === 0) { 🥇 }
+                                @else if (i === 1) { 🥈 }
+                                @else if (i === 2) { 🥉 }
+                                @else { {{ c.ranking }} }
+                            </td>
+                            <td>
+                                <span class="fi fi-{{ c.nationality }} small"></span> {{ c.username }}
+                            </td>
+                            <td>{{ c.chronoValue / 1000 | chronoFormat }}</td>
+                        </tr>
+                        }
+                    </tbody>
 
-    <div id="classementTable" class="collapse hide">
-        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-            <table class="table table-sm mb-0 text-center">
-                <thead class="table-light sticky-top">
-                    <tr>
-                        <th>#</th>
-                        <th>Nom</th>
-                        <th>Temps</th>
-                    </tr>
-                </thead>
-<tbody>
-    @for (c of chronos; let i = $index; track c.ranking) {
-    <tr [class.user-best]="userBestChrono?.username === c.username && userBestChrono?.chronoValue === c.chronoValue"
-        [class.table-light]="i % 2 === 0" [class.table-white]="i % 2 === 1"        
-        >
-        <td>
-            @if (i === 0) { 🥇 }
-            @else if (i === 1) { 🥈 }
-            @else if (i === 2) { 🥉 }
-            @else { {{ c.ranking }} }
-        </td>
-        <td>
-            <span class="fi fi-{{ c.nationality }} small"></span> {{ c.username }}</td>
-        <td>{{ c.chronoValue / 1000 | chronoFormat }}</td>
-    </tr>
-    }
-</tbody>
-
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 </div>
