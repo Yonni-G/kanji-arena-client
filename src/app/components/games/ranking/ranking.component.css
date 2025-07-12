@@ -8,3 +8,22 @@ table tr.user-best td {
     z-index: 1;
     /* ou 0 */
 }
+.user-best {
+    background: linear-gradient(90deg, #fffbe6 0%, #e7ffe9 100%) !important;
+    font-weight: bold;
+    border-left: 4px solid #28a745;
+}
+
+.table-warning td,
+.table-secondary td,
+.table-danger td {
+    font-weight: bold;
+}
+
+.bg-warning {
+    background-color: #ffe066 !important;
+}
+
+.text-warning {
+    color: #ffae00 !important;
+}

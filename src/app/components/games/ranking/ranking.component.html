@@ -57,7 +57,7 @@
         <button class="card-header d-flex justify-content-between align-items-center bg-light border-0 text-start"
             type="button" data-bs-toggle="collapse" data-bs-target="#classementTable" aria-expanded="false"
             aria-controls="classementTable">
-            <span><i class="bi bi-list-ol me-2"></i>Classement général<small> • {{ metrics.nbLimitRanking }}
+            <span><i class="bi bi-trophy-fill text-warning me-2"></i>Classement général<small> • {{ metrics.nbLimitRanking }}
                     premiers</small></span>
             <i class="bi bi-chevron-down"></i>
         </button>
@@ -83,10 +83,14 @@
                                 @else if (i === 2) { 🥉 }
                                 @else { {{ c.ranking }} }
                             </td>
-                            <td>
-                                <span class="fi fi-{{ c.nationality }} small"></span> {{ c.username }}
+                            <td class="text-start">
+                                <span class="fi fi-{{ c.nationality }} small me-1"></span>
+                                <span>{{ c.username }}</span>
                             </td>
-                            <td>{{ c.chronoValue / 1000 | chronoFormat }}</td>
+                            <td class="fw-bold text-primary">
+                                {{ c.chronoValue / 1000 | chronoFormat }}
+                            </td>
+
                             <td>{{ c.createdAt | date:'dd/MM/yyyy' }}</td>
 
                         </tr>

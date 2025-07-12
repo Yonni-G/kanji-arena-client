@@ -18,6 +18,11 @@
                     @for(choice of card?.choices; track $index) {
                     <button (click)="onCheck($index, card)" type="button" class="btn choice flex-fill my-1 mx-md-1">
                         {{ choice.label | uppercase }}
+                        @if(choice.more && choice.more.length > 0) {
+                        <span class="text-muted small fst-italic" style="font-size: 0.8rem;">
+                            ({{ choice.more.join(', ') }})
+                        </span>
+                        }
                     </button>
                     }
                     }

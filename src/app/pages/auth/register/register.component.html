@@ -38,7 +38,7 @@
                             <ng-country-select class="m-0" id="nationality" [lang]="'fr'" [formControl]="nationalityControl" [searchAllLanguages]="true" [showCodes]="false"
                                 [debounceTime]="200" [required]="true" [requiredErrorMessage]="'A country is required'"
                                 [showRequiredErrorMessage]="false" [disabled]="false" [appearance]="'outline'" [placeholder]="'Votre pays d\'origine'"
-                                [color]="'primary'" [alpha2Only]="true" [alpha3Only]="false" [showFlag]="true"
+                                [color]="'primary'" [alpha2Only]="false" [alpha3Only]="false" [showFlag]="true"
                                 [excludeCountries]="[]"></ng-country-select>
                     </div>
                     @if (form.get("nationality")?.touched && form.get("nationality")?.invalid) {
