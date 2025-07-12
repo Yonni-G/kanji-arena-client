@@ -2,5 +2,6 @@ export type UserChrono = {
   chronoValue: number,
   ranking: number,
   username: string,
-  nationality: string
+  nationality: string,
+  createdAt: Date,
 };

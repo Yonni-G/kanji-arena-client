@@ -1,15 +1,19 @@
 <!-- Si best chrono utilisateur, on l'affiche ici -->
-@if (userBestChrono) {<div class="alert alert-light border border-danger mx-auto my-3 py-3 px-4 text-center w-100" style="max-width: 480px;">
-    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
-        <div class="d-flex align-items-center gap-2">
+@if (userBestChrono) {
+
+<div class="alert alert-light border border-danger mx-auto my-3 py-3 px-3 px-md-4 text-center w-100"
+    style="max-width: 420px;">
+    <div class="d-flex flex-column align-items-center gap-3">
+        <!-- Ligne 1 : Meilleur chrono -->
+        <div class="d-flex align-items-center gap-2 justify-content-center">
             <i class="bi bi-stopwatch text-danger fs-3"></i>
             <span class="fw-semibold">
                 Votre meilleur chrono :
                 <span class="text-danger fs-5">{{ userBestChrono.chronoValue / 1000 | chronoFormat }}</span>
             </span>
         </div>
-        <span class="vr d-none d-md-block mx-3" style="height: 40px;"></span>
-        <div class="d-flex align-items-center gap-2">
+        <!-- Ligne 2 : Rang -->
+        <div class="d-flex align-items-center gap-2 justify-content-center">
             <span class="fw-semibold">
                 Rang :
                 <span class="text-dark fs-5">#{{ userBestChrono.ranking }}</span>
@@ -18,30 +22,31 @@
             @if (userBestChrono.ranking === 1) {
             <span
                 class="badge bg-warning text-dark ms-2 d-flex align-items-center px-3 py-2 shadow-lg border border-3 border-warning"
-                style="font-size: 1.4rem;">
-                <i class="bi bi-trophy-fill me-2 fs-3 text-warning"></i>
+                style="font-size: 1.1rem;">
+                <i class="bi bi-trophy-fill me-2 fs-5 text-warning"></i>
                 1<sup>er</sup> 🥇
             </span>
             }
             @else if (userBestChrono.ranking === 2) {
             <span
                 class="badge bg-secondary text-white ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-secondary"
-                style="font-size: 1.2rem;">
-                <i class="bi bi-trophy-fill me-2 fs-4 text-white"></i>
+                style="font-size: 1rem;">
+                <i class="bi bi-trophy-fill me-2 fs-6 text-white"></i>
                 2<sup>ème</sup> 🥈
             </span>
             }
             @else if (userBestChrono.ranking === 3) {
             <span
                 class="badge bg-dark text-warning ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-dark"
-                style="font-size: 1.1rem;">
-                <i class="bi bi-trophy-fill me-2 fs-4 text-warning"></i>
+                style="font-size: 0.95rem;">
+                <i class="bi bi-trophy-fill me-2 fs-6 text-warning"></i>
                 3<sup>ème</sup> 🥉
             </span>
             }
         </div>
     </div>
 </div>
+
 
 }
 
@@ -65,6 +70,7 @@
                             <th>#</th>
                             <th>Nom</th>
                             <th>Temps</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,6 +87,8 @@
                                 <span class="fi fi-{{ c.nationality }} small"></span> {{ c.username }}
                             </td>
                             <td>{{ c.chronoValue / 1000 | chronoFormat }}</td>
+                            <td>{{ c.createdAt | date:'dd/MM/yyyy' }}</td>
+
                         </tr>
                         }
                     </tbody>

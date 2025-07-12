@@ -3,12 +3,12 @@ import { GameMode } from '../../../models/GameMode';
 import { ApiGameService } from '../../../services/api.game.service';
 import { UserChrono } from '../../../models/userChrono';
 import { ChronoFormatPipe } from '../../../pipes/chrono-format.pipe';
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-ranking',
-  imports: [ChronoFormatPipe, NgClass],
+  imports: [ChronoFormatPipe, DatePipe],
   templateUrl: './ranking.component.html',
   styleUrl: './ranking.component.css',
 })
@@ -34,7 +34,8 @@ export class RankingComponent {
 
   loadRanking() {
     this.apiGameService.loadRanking(this.gameMode).subscribe({
-      next: (data) => {console.log('Classement chargé', data);
+      next: (data) => {
+        console.log('Classement chargé', data);
         this.userBestChrono = data.userBestChrono;
         this.chronos = data.chronos;
         this.metrics = data.metrics;

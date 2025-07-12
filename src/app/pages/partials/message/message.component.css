@@ -1,0 +1,17 @@
+.alert-toast {
+    position: fixed;
+    top: 150px;
+    /* ajuste selon la hauteur de ton header */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    min-width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0.97;
+    font-size: 1.1em;
+    transition: opacity 0.3s;
+}

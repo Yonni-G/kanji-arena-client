@@ -41,22 +41,22 @@ export class RegisterComponent {
 
   form = new FormGroup(
     {
-      username: new FormControl('popo', [
+      username: new FormControl('', [
         Validators.pattern('^[a-zA-Z0-9]{3,12}$'), // 3 à 12 caractères alphanumériques
       ]),
       nationality: this.nationalityControl,
-      email: new FormControl('popo@example.com', [
+      email: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
       ]),
-      password: new FormControl('Popo123!!', [
+      password: new FormControl('', [
         Validators.required,
         // Au moins 8 caractères, au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial
         Validators.pattern(
           '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>?/~]).{8,}$'
         ),
       ]),
-      confirmPassword: new FormControl('Popo123!!', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
     },
     { validators: passwordMatchValidator() }
   ); // Ajout du validateur de correspondance);

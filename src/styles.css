@@ -43,3 +43,13 @@ body { margin: 0; font-family: "Sawarabi Mincho", sans-serif; }
     border-color: #3b3d41;
     /* Bordure bleue au survol */
 }
+
+.correctAnswer {
+    background-color: rgba(var(--bs-success-rgb), 0.2);
+    /* Vert clair transparent */
+}
+
+.unCorrectAnswer {
+    background-color: rgba(var(--bs-danger-rgb), 0.2);
+    /* Rouge clair transparent */
+}

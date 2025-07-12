@@ -1,16 +1,15 @@
 @if(message?.type === 'error') {
-  <div class="p-3 m-2 bg-warning-subtle text-warning-emphasis alert">
-    <em>{{ message?.text }}</em>
-  </div>
+<div class="alert-toast bg-warning-subtle text-warning-emphasis alert shadow">
+  <em>{{ message?.text }}</em>
+</div>
 }
-
 @if(message?.type === 'info') {
-  <div class="p-3 m-2 bg-info-subtle text-info-emphasis alert">
-    <em>{{ message?.text }}</em>
-  </div>
+<div class="alert-toast bg-info-subtle text-info-emphasis alert shadow">
+  <em>{{ message?.text }}</em>
+</div>
 }
 @if(message?.type === 'success') {
-  <div class="p-3 m-2 bg-success-subtle text-success-emphasis alert">
-    <em>{{ message?.text }}</em>
-  </div>
+<div class="alert-toast bg-success-subtle text-success-emphasis alert shadow">
+  <em>{{ message?.text }}</em>
+</div>
 }
