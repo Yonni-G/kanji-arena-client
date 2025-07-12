@@ -1,76 +1,64 @@
 @if(listErrors.length) {
-  <div class="m-4">
-    <!-- Lien toggle -->
-    <a href="#" (click)="showErrors = !showErrors; $event.preventDefault()"
-      class="fw-bold text-danger text-decoration-underline d-inline-block mb-2">
-      {{ showErrors ? 'Masquer la liste de vos erreurs ▲' : 'Afficher la liste de vos erreurs ▼' }}
-    </a>
+<div class="m-4">
+  <p class="fw-bold text-danger text-decoration-underline mb-4">
+    <i class="bi bi-chevron-down me-2"></i>Liste de vos erreurs
+  </p>
 
-    <!-- Liste des erreurs (avec collapse) -->
-    <div [hidden]="!showErrors">
-      <div class="row justify-content-start gx-5 gy-4">
+  <div class="row gx-4 gy-4">
+    @for (err of listErrors; track err; let i = $index) {
+    <div [ngClass]="{
+        'col-12 col-sm-6 col-md-5 col-lg-4': gameMode === GameMode.CLASSIC,
+        'col-12 col-sm-6 col-md-4 col-lg-3': gameMode === GameMode.REVERSE
+      }">
+      <div class="border rounded p-3 h-100 bg-light position-relative">
+        <!-- Numéro -->
+        <div class="position-absolute top-0 end-0 mt-2 me-2 text-muted small">
+          #{{ i + 1 }}
+        </div>
 
-        @for (err of listErrors; track err; let i = $index) {
-          <div class="position-relative" [ngClass]="{
-                           'col-12 col-sm-6 col-md-5 col-lg-4': gameMode === GameMode.CLASSIC,
-                           'col-12 col-sm-6 col-md-4 col-lg-3': gameMode === GameMode.REVERSE
-                         }">
-            <div class="card border rounded shadow-sm p-3">
-              <!-- Numéro discret -->
-              <div style="position: absolute; top: 6px; right: 10px; font-size: 0.9rem; color: #999;">
-                #{{ i + 1 }}
-              </div>
+        @if(gameMode === GameMode.CLASSIC) {
+        <!-- CLASSIC MODE -->
+        <div class="d-flex align-items-center gap-3 h-100">
+          <!-- Gros kanji à gauche -->
+          <div class="flex-shrink-0 text-center" style="font-size: 5rem; line-height: 1;">
+            {{ err.proposal }}
+          </div>
 
-              <div class="d-flex align-items-stretch mt-4">
-                <!-- Affichage du kanji ou du sens selon le mode -->
-                <div class="me-3 d-flex align-items-center">
-                  @if(gameMode === GameMode.CLASSIC) {
-                    <!-- Affichage du kanji pour le mode Classic -->
-                    <span style="font-size: 6rem;">
-                      {{ err.proposal }}
-                    </span>
-                  }
-
-                  @if(gameMode === GameMode.REVERSE) {
-                    <!-- Affichage du sens pour le mode Reverse -->
-                    <span class="text-uppercase" style="font-size: 1.5rem; font-weight: bold;">
-                      {{ err.proposal }}
-                    </span>
-                  }
-                </div>
-
-                <!-- Séparateur -->
-                <div style="width: 1px; background-color: #c7bbbb;"></div>
-
-                @if(gameMode === GameMode.CLASSIC) {
-                <!-- Réponses -->
-                <div class="ms-3 d-flex flex-column justify-content-center" style="font-size: 1.5rem">
-                  <span class="text-danger fw-bold text-uppercase text-decoration-line-through mt-2">
-                    ✖ {{ err.unCorrect }}
-                  </span>
-                  <span class="text-success fw-bold text-uppercase">
-                    ✔ {{ err.correct }}
-                  </span>
-                </div>
-                }
-                
-                @if(gameMode === GameMode.REVERSE) {
-                <!-- Réponses -->
-                <div class="ms-3 d-flex flex-column justify-content-center align-items-center text-center" style="font-size: 2.5rem">
-                  <span class="text-danger fw-bold text-uppercase mt-2">
-                    {{ err.unCorrect }}
-                  </span>
-                  <span class="text-success fw-bold text-uppercase">
-                    {{ err.correct }}
-                  </span>
-                </div>
-
-                }
-              </div>
+          <!-- Réponses -->
+          <div class="border-start ps-3 ms-2 d-flex flex-column justify-content-center text-uppercase" style="font-size: 1.2rem;">
+            <div class="text-danger fw-bold mb-2">
+              {{ err.unCorrect }}
+            </div>
+            <div class="text-success fw-bold">
+              {{ err.correct }}
             </div>
           </div>
+        </div>
         }
+
+        @if(gameMode === GameMode.REVERSE) {
+        <!-- REVERSE MODE -->
+        <div class="d-flex flex-column align-items-center text-center h-100">
+          <!-- Sens -->
+          <div class="fw-bold text-uppercase mb-3" style="font-size: 2rem;">
+            {{ err.proposal }}
+          </div>
+
+          <!-- Kanji incorrect -->
+          <div class="text-danger fw-bold mb-2" style="font-size: 3.5rem; line-height: 1;">
+            {{ err.unCorrect }}
+          </div>
+
+          <!-- Kanji correct -->
+          <div class="text-success fw-bold" style="font-size: 3.5rem; line-height: 1;">
+            {{ err.correct }}
+          </div>
+        </div>
+        }
+
       </div>
     </div>
+    }
   </div>
+</div>
 }

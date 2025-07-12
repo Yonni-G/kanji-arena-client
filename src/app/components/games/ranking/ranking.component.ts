@@ -34,7 +34,7 @@ export class RankingComponent {
 
   loadRanking() {
     this.apiGameService.loadRanking(this.gameMode).subscribe({
-      next: (data) => {
+      next: (data) => {console.log('Classement chargé', data);
         this.userBestChrono = data.userBestChrono;
         this.chronos = data.chronos;
         this.metrics = data.metrics;

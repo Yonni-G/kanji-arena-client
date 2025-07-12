@@ -4,3 +4,7 @@ table tr.user-best td {
     color: white !important;
     font-weight: bold;
 }
+#classementTable thead.sticky-top {
+    z-index: 1;
+    /* ou 0 */
+}

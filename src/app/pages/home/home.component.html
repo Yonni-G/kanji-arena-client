@@ -1,27 +1,77 @@
 <main class="container my-5">
-    <!-- Section Hero -->
-    <section class="text-center">
-      <h1 class="fw-bold text-danger">Bienvenue sur Kanji-Arena</h1>
-      <p class="text-muted">Plateforme mondiale de jeux en ligne destinés aux apprenants en Japonais.</p>
-      <p class="text-muted">Participez à des jeux basés sur les Kanji et améliorez vos compétences en Japonais tout en vous amusant !</p>
-      <p class="text-muted">Multiples classements, alertes scores battus... tout est fait pour créer un engagement fort ! Alors entrez maintenant dans la Kanji-Arena et que le meilleur gagne !</p>
-    </section>
-  
-    <!-- Section Présentation -->
-    <section class="row mt-5">
-      <div class="col-md-6 d-flex flex-column align-items-center">
-        <!--<img src="https://via.placeholder.com/300" class="img-fluid rounded" alt="Illustration">-->
+  <!-- Section Hero améliorée -->
+  <section class="py-5 px-3 rounded-4 shadow text-center mb-5"
+    style="background: linear-gradient(135deg, #fff 60%, #ffeaea 100%);">
+    <div class="mb-4">
+      <i class="bi bi-trophy-fill display-3 text-danger"></i>
+    </div>
+    <h1 class="fw-bold mb-3 display-4 text-danger">
+      Bienvenue sur <span class="text-dark">Kanji-Arena</span>
+    </h1>
+    <p class="lead text-secondary mb-4">
+      La plateforme mondiale de jeux en ligne pour tous les passionnés d’apprentissage du japonais.
+    </p>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <p class="fs-5 text-dark mb-2">
+          Défiez-vous sur des jeux basés sur les Kanji, progressez en japonais et amusez-vous avec la communauté !
+        </p>
+        <p class="fs-6 text-muted mb-0">
+          Classements dynamiques, alertes personnalisées… tout est pensé pour booster votre motivation.<br>
+          <span class="fw-semibold text-primary">Rejoignez l’arène et que le meilleur gagne !</span>
+        </p>
       </div>
-      <div class="col-md-6 d-flex flex-column justify-content-center">
-        <h2 class="fw-bold text-danger">À propos</h2>
-        <p>Nous partageons notre passion pour la culture japonaise en proposant des produits authentiques et uniques.</p>
+    </div>
+    <!-- si l'utilisateur est connecté, le lien renvoit vers le jeu Classic, sinon il renvoit vers l'inscription -->
+    <a [routerLink]="authService.isAuthenticated() ? ['/games/classic'] : ['/register']" class="btn btn-danger btn-lg px-4 fw-bold shadow-sm">
+      Commencer à jouer
+      <i class="bi bi-arrow-right ms-2"></i>
+    </a>
+  </section>
+
+  <!-- Section Features (inchangée) -->
+  <section>
+    <h2 class="text-center mb-4">Fonctionnalités</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-controller display-4 text-primary"></i>
+            </div>
+            <h3 class="card-title">Jeux Variés</h3>
+            <p class="card-text text-muted">
+              Participez à une variété de jeux pour tester vos connaissances en Kanji.
+            </p>
+          </div>
+        </div>
       </div>
-    </section>
-  
-    <!-- Section Boutons Call-To-Action -->
-    <section class="text-center mt-5">
-      <a href="#shop" class="btn btn-danger text-white fw-bold me-2">Explorer</a>
-      <a href="#contact" class="btn btn-outline-danger fw-bold">Nous Contacter</a>
-    </section>
-  </main>
-  
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-bar-chart-steps display-4 text-success"></i>
+            </div>
+            <h3 class="card-title">Classements Dynamiques</h3>
+            <p class="card-text text-muted">
+              Comparez vos scores avec ceux des autres joueurs et grimpez dans les classements.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-bell-fill display-4 text-warning"></i>
+            </div>
+            <h3 class="card-title">Alertes Personnalisées</h3>
+            <p class="card-text text-muted">
+              Recevez des notifications lorsque vos scores sont battus par d'autres joueurs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

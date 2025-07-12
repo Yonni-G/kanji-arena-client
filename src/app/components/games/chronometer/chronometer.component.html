@@ -1,3 +1,8 @@
 <div class="chronometer">
-    <h1>{{ time! | chronoFormat  }}</h1>
+    <h1>
+        <span class="text-danger">
+            <i class="bi bi-stopwatch fs-3"></i>
+            {{ time! | chronoFormat }}
+        </span>
+    </h1>
 </div>

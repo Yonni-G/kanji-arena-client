@@ -1,0 +1,49 @@
+footer {
+    background-color: #2b2a2e;
+    color: #f8f9fa;
+    border-top: 2px solid #dc3545;
+}
+
+footer h5 {
+    color: #dc3545;
+}
+
+.footer-link {
+    color: #f8f9fa;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+    color: #dc3545;
+    text-decoration: underline;
+}
+
+footer .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    background-color: transparent;
+}
+
+footer .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+footer .btn-warning {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+}
+
+footer .btn-warning:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+footer .bg-danger {
+    background-color: #dc3545 !important;
+    color: #fff;
+}

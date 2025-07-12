@@ -1,42 +1,29 @@
-<footer class="bg-light text-center text-lg-start border-top border-danger mt-4">
-    <div class="container p-4">
-      <!-- Section: Liens rapides -->
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-danger fw-bold">Liens rapides</h5>
-          <ul class="list-unstyled mb-0">
-            <li><a href="#home" class="text-dark text-decoration-none">Home</a></li>
-            <li><a href="#about" class="text-dark text-decoration-none">About</a></li>
-            <li><a href="#login" class="text-dark text-decoration-none">Login</a></li>
-            <li><a href="#register" class="text-dark text-decoration-none">Register</a></li>
-          </ul>
-        </div>
-  
-        <!-- Section: Contact -->
-        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-danger fw-bold">Contactez-moi</h5>
-          <p></p>
-          <p>+81 123 456 789</p>
-          <a href="https://www.buymeacoffee.com/yonni" target="_blank">
-            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"
-              style="height: 60px; width: 217px" />
-          </a>
-
-        </div>
-  
-        <!-- Section: Réseaux sociaux -->
-        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-danger fw-bold">Suivez-nous</h5>
-          <a href="#" class="btn btn-outline-danger btn-floating m-1" role="button"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="btn btn-outline-danger btn-floating m-1" role="button"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="btn btn-outline-danger btn-floating m-1" role="button"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
+<footer class="text-light border-top border-danger mt-4 pt-3">
+  <div class="container py-3">
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+      <!-- Liens rapides sur une seule ligne -->
+      <nav>
+        <a [routerLink]="['/']" class="footer-link d-inline-flex align-items-center mx-2">
+          <i class="bi bi-house-door-fill me-1"></i>Accueil
+        </a>
+        <a [routerLink]="['/about']" class="footer-link d-inline-flex align-items-center mx-2">
+          <i class="bi bi-info-circle-fill me-1"></i>À propos
+        </a>
+        <a [routerLink]="['/contact']" class="footer-link d-inline-flex align-items-center mx-2">
+          <i class="bi bi-envelope-fill me-1"></i>Contact
+        </a>
+        <a href="https://twitter.com/yonni" class="btn btn-outline-danger btn-sm btn-floating mx-1" role="button"
+          aria-label="Twitter">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+      </nav>
+      <!-- Café -->
+      <a href="https://www.buymeacoffee.com/yonni" target="_blank"
+        class="btn btn-warning rounded-pill d-flex align-items-center gap-2 px-3 py-2 shadow-sm"
+        style="font-weight:600;">
+        <i class="bi bi-cup-hot-fill"></i>
+        Offrez-moi un café !
+      </a>
     </div>
-  
-    <!-- Section: Copyright -->
-    <div class="text-center p-3 bg-danger text-white">
-      ©Kanji-Master. Tous droits réservés. ©Yonni.com
-    </div>
-  </footer>
-  
+  </div>
+</footer>

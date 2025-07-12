@@ -1,11 +1,13 @@
 import { Component, inject} from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './pages/partials/header/header.component';
 import { FooterComponent } from './pages/partials/footer/footer.component';
 import { MessageComponent } from './pages/partials/message/message.component';
 import { AuthService } from './services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MessageService } from './services/message.service';
+import { Title } from '@angular/platform-browser';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +16,29 @@ import { MessageService } from './services/message.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  private readonly router = inject(Router);
+
+  constructor(
+    private titleService: Title,
+    private activatedRoute: ActivatedRoute
+  ) {
+    // Met à jour le titre à chaque navigation
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        let route = this.activatedRoute;
+        while (route.firstChild) route = route.firstChild;
+        const pageTitle =
+          route.snapshot.data['title'] ?
+          (route.snapshot.data['title'] + ' | Kanji Arena') :
+          'Kanji Arena';
+        this.titleService.setTitle(pageTitle);
+      });
+  }
+
   private readonly authService = inject(AuthService);
   private readonly jwtHelper = inject(JwtHelperService);
-  private readonly router = inject(Router);
-  private readonly messageService = inject(MessageService)
+  private readonly messageService = inject(MessageService);
 
   ngOnInit(): void {
     const token = this.authService.getAccessTokenFromStorage();

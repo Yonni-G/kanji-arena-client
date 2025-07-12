@@ -1,22 +1,241 @@
+/* Logo */
 .logo-shadow {
-    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
-    /* même rouge que btn-danger */
-    border-radius: 6px;
+    max-height: 118px;
+    height: auto;
+    width: auto;
 }
 
+/* Navbar */
+.navbar {
+    background: #2b2a2e !important;
+    border-bottom: 2px solid #dc3545;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Brand */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #dc3545 !important;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Liens nav */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    color: #f8f9fa;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #fff !important;
+    background: #dc3545 !important;
+    text-decoration: none;
+}
+
+/* Boutons */
 .btn {
     display: inline-block;
-    /* Permet au bouton de s'adapter au contenu */
-    width: fit-content;
-    /* Ajuste la largeur en fonction du texte */
     white-space: nowrap;
-    /* Empêche le texte de se diviser sur plusieurs lignes */
     text-align: center;
-    /* Centre le texte dans le bouton */
+    padding: 6px 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Bouton principal */
+.btn-outline-danger {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    background: transparent;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* Conteneur central centré avec largeur auto */
+.kanji-nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #EEE3D2;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    /* Position absolute (à désactiver en mobile) */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.navbar .container {
+    position: relative;
+}
+
+.kanji-callout {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Liens de jeu */
+.kanji-link-group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Effet bouton 3D pour chaque lien */
+.kanji-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 20px;
-    /* Ajoute un espace autour du texte */
-    font-size: 16px;
-    /* Ajuste la taille du texte */
-    line-height: 1.5;
-    /* Ajuste l'espacement entre les lignes */
+    background: linear-gradient(to bottom, #444 0%, #222 100%);
+    color: #f8f9fa;
+    border-radius: 6px;
+    box-shadow: 0 4px 0 #b02a37;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.kanji-button:hover {
+    color: #fff;
+    background: linear-gradient(to bottom, #dc3545 0%, #a71d2a 100%);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #7c1b24;
+}
+
+/* Style spécial pour les deux liens finaux */
+.navbar-nav.ms-auto .btn-outline-final {
+    border: 2px solid #EEE3D2;
+    color: #EEE3D2;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* font-weight: 600; */
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.12);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    padding: 10px 22px;
+}
+
+.navbar-nav.ms-auto .btn-outline-final:hover,
+.navbar-nav.ms-auto .btn-outline-final:focus {
+    background: #EEE3D2;
+    color: #2b2a2e;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.24);
+    text-decoration: none;
+}
+
+@media (max-width: 991.98px) {
+
+    /* Logo plus grand sur mobile */
+    .logo-shadow {
+        max-height: 60px;
+    }
+
+    /* Centre les deux boutons finaux et réduit la largeur */
+    .navbar-nav.ms-auto {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        margin-top: 1rem;
+        align-items: center !important;
+        /* centrage horizontal */
+        width: auto !important;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Boutons rouges plus visibles, larges et centrés */
+    .navbar-nav.ms-auto .btn-outline-danger {
+        padding: 8px 16px;
+        font-size: 1rem;
+        border-width: 1.5px;
+        border-color: #a71d2a;
+        color: #a71d2a;
+        background: transparent;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .navbar-nav.ms-auto .btn-outline-danger:hover,
+    .navbar-nav.ms-auto .btn-outline-danger:focus {
+        background: #a71d2a;
+        color: #fff;
+    }
+
+    /* Fond du menu déroulant et coins arrondis */
+    .navbar-collapse {
+        background-color: #2b2a2e;
+        padding: 1rem;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Menu central recentré, moins large et mieux espacé */
+    .kanji-nav-center {
+        position: static !important;
+        transform: none !important;
+        margin: 1rem auto;
+        width: auto;
+        max-width: 320px;
+        z-index: auto;
+        border-radius: 10px;
+        padding: 1rem 1.5rem;
+        background-color: rgba(255, 255, 255, 0.03);
+        text-align: center;
+    }
+
+    /* Liens de jeu en colonne, largeur adaptée */
+    .kanji-link-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        padding: 0;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* Liens nav mieux espacés */
+    .navbar-nav .nav-link {
+        padding: 8px 12px;
+        font-size: 1rem;
+    }
+
+    /* Boutons plus ergonomiques */
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Marque réduite */
+    .navbar-brand {
+        gap: 0.75rem;
+    }
 }

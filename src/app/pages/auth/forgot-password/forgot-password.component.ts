@@ -33,6 +33,7 @@ export class ForgotPasswordComponent {
 
       let user: User = {
         username: '',
+        nationality: '',
         email: this.form.value.email || '',
         password: '',
         confirmPassword: '',

@@ -75,6 +75,7 @@ export class ResetPasswordComponent {
     if (this.form.valid) {
       let user: User = {
         username: '',
+        nationality: '',
         email: '',
         password: this.form.value.password || '',
         confirmPassword: this.form.value.confirmPassword || '',

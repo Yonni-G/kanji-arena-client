@@ -25,11 +25,11 @@ export class LoginComponent {
   loading = false;
 
   form = new FormGroup({
-    email: new FormControl('Yonni4@gmail.com', [
+    email: new FormControl(null, [
       Validators.required,
       Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
     ]),
-    password: new FormControl('Popo45!!', [
+    password: new FormControl(null, [
       Validators.required,
       // Au moins 8 caractères, au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial
       Validators.pattern(
@@ -42,6 +42,7 @@ export class LoginComponent {
     if (this.form.valid) {
       let user: User = {
         username: '',
+        nationality: '',
         email: this.form.value.email || '',
         password: this.form.value.password || '',
         confirmPassword: '',

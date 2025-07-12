@@ -1,0 +1,75 @@
+<main class="container my-5">
+
+    <!-- Section Hero -->
+    <section class="text-center mb-5">
+        <div class="mb-3">
+            <i class="bi bi-envelope-paper-fill display-3 text-danger"></i>
+        </div>
+        <h1 class="fw-bold text-danger mb-3">Contact</h1>
+        <p class="text-muted fs-5">
+            Une question ? Un bug ? Écris-nous, on te répond vite !
+        </p>
+    </section>
+
+    <!-- Formulaire -->
+    <section class="row">
+        <div class="col-md-6 offset-md-3">
+            <form (submit)="onSubmit()" [formGroup]="form" class="bg-light p-4 rounded-4 shadow">
+
+                <!-- Nom -->
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold text-danger">
+                        <i class="bi bi-person-fill me-2"></i>Votre nom
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-person text-danger"></i></span>
+                        <input formControlName="name" type="text" id="name" class="form-control"
+                            placeholder="Entrez votre nom" required>
+                    </div>
+                    @if(form.get("name")?.touched && form.get("name")?.invalid) {
+                    <small class="text-danger fst-italic">Ce champ est requis.</small>
+                    }
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold text-danger">
+                        <i class="bi bi-envelope-fill me-2"></i>Votre email
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-at text-danger"></i></span>
+                        <input formControlName="email" type="email" id="email" class="form-control"
+                            placeholder="exemple@domaine.com" required>
+                    </div>
+                    @if(form.get("email")?.touched && form.get("email")?.invalid) {
+                    <small class="text-danger fst-italic">Adresse email invalide.</small>
+                    }
+                </div>
+
+                <!-- Message -->
+                <div class="mb-3">
+                    <label for="message" class="form-label fw-bold text-danger">
+                        <i class="bi bi-chat-left-text-fill me-2"></i>Votre message
+                    </label>
+                    <textarea formControlName="message" id="message" class="form-control" rows="5"
+                        placeholder="Expliquez-nous ce qu'on peut faire pour vous." required></textarea>
+                    @if(form.get("message")?.touched && form.get("message")?.invalid) {
+                    <small class="text-danger fst-italic">Ce champ est requis.</small>
+                    }
+                </div>
+
+                <!-- Bouton d'envoi -->
+                <div class="text-center mt-4">
+                    <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold px-4">
+                        <i class="bi bi-send-fill me-2"></i>
+                        @if (!loading) {
+                        Envoyer le message
+                        } @else {
+                        <span class="spinner-border spinner-border-sm me-2"></span> Envoi...
+                        }
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

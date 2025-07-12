@@ -1,45 +1,61 @@
 <main class="container my-5">
     <!-- Section Hero -->
-    <section class="text-center">
-        <h1 class="fw-bold text-danger">Connexion</h1>
-        <p class="text-muted">Connectez-vous pour accéder à votre compte et profiter pleinement de notre communauté
-            passionnée par la culture japonaise.</p>
+    <section class="text-center mb-5">
+        <div class="mb-3">
+            <i class="bi bi-person-circle display-3 text-danger"></i>
+        </div>
+        <h1 class="fw-bold text-danger mb-3">Connexion</h1>
+        <p class="text-muted fs-5">
+            Connectez-vous pour entrer dans la Kanji-Arena et défiez nos gladiateurs du Kanji du monde entier !
+        </p>
     </section>
 
     <!-- Section Formulaire -->
-    <section class="row mt-5">
+    <section class="row">
         <div class="col-md-6 offset-md-3">
-            <form (submit)="onSubmit()" [formGroup]="form">
+            <form (submit)="onSubmit()" [formGroup]="form" class="bg-light p-4 rounded-4 shadow">
                 <div class="mb-3">
-                    <label for="email" class="form-label fw-bold text-danger">Adresse email</label>
-                    <input formControlName="email" type="text" id="email" name="email" class="form-control"
-                        placeholder="Votre adresse email" required>
-                    @if(form.get("email")?.touched &&
-                    form.get("email")?.invalid) {
+                    <label for="email" class="form-label fw-bold text-danger">
+                        <i class="bi bi-envelope-fill me-2"></i>Adresse email
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-at text-danger"></i></span>
+                        <input formControlName="email" type="text" id="email" name="email" class="form-control"
+                            placeholder="Votre adresse email" required>
+                    </div>
+                    @if(form.get("email")?.touched && form.get("email")?.invalid) {
                     @if(form.get('email')?.hasError('pattern')) {
                     <small class="text-danger fst-italic">Saisissez une adresse email correcte</small>
-                    } }
+                    }
+                    }
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label fw-bold text-danger">Mot de passe</label>
-                    <input formControlName="password" type="password" id="password" name="password" class="form-control"
-                        placeholder="Entrez votre mot de passe" required>
-                    @if(form.get("password")?.touched &&
-                    form.get("password")?.invalid) {
+                    <label for="password" class="form-label fw-bold text-danger">
+                        <i class="bi bi-lock-fill me-2"></i>Mot de passe
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-key-fill text-danger"></i></span>
+                        <input formControlName="password" type="password" id="password" name="password"
+                            class="form-control" placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    @if(form.get("password")?.touched && form.get("password")?.invalid) {
                     @if(form.get('password')?.hasError('pattern')) {
-                    <small class="text-danger fst-italic">Le mot de passe doit contenir au moins 8 caractères, une
-                        majuscule, une minuscule, un chiffre et un caractère spécial.</small>
-                    } }
+                    <small class="text-danger fst-italic">
+                        Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et
+                        un caractère spécial.
+                    </small>
+                    }
+                    }
                 </div>
                 <div class="text-center mt-4">
-                    <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold">
+                    <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold px-4">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
                         @if (!loading) {
-                        Connexion 
+                        Connexion
                         } @else {
-                        <span class="spinner"></span> Chargement...
+                        <span class="spinner-border spinner-border-sm me-2"></span> Chargement...
                         }
                     </button>
-
                 </div>
             </form>
         </div>
@@ -48,12 +64,15 @@
     <!-- Section Call-To-Action -->
     <section class="text-center mt-5">
         <p class="text-muted">Pas encore inscrit ?</p>
-        <a routerLink="/register" routerLinkActive="active" class="btn btn-outline-danger fw-bold">Créer un compte</a>
+        <a routerLink="/register" routerLinkActive="active" class="btn btn-outline-danger fw-bold">
+            <i class="bi bi-person-plus-fill me-2"></i>Créer un compte
+        </a>
     </section>
 
     <!-- Section Mot de passe oublié -->
     <section class="text-center mt-3">
-        <a [routerLink]="['/forgot-password']" routerLinkActive="active" class="text-danger fw-bold">Mot de passe oublié ?</a>
+        <a [routerLink]="['/forgot-password']" routerLinkActive="active" class="text-danger fw-bold">
+            <i class="bi bi-question-circle-fill me-2"></i>Mot de passe oublié ?
+        </a>
     </section>
-
 </main>

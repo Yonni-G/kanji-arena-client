@@ -34,8 +34,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './game-layout.component.css',
 })
 export class GameLayoutComponent {
-  title: string = '';
-  subtitle: string = '';
+  gameName: string = '';
+  gameDesc: string = '';
   gameMode: GameMode | null = null;
   authService: AuthService = inject(AuthService);
   gameService: GameService = inject(GameService);
@@ -74,8 +74,8 @@ export class GameLayoutComponent {
       child = child.firstChild;
     }
     const data = child.snapshot.data;
-    this.title = data?.['title'] || '';
-    this.subtitle = data?.['subtitle'] || '';
+    this.gameName = data?.['gameName'] || '';
+    this.gameDesc = data?.['gameDesc'] || '';
     this.gameMode = data?.['gameMode'] ?? null;
   }
 

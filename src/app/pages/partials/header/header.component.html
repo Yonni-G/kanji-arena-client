@@ -1,68 +1,66 @@
 <header>
-  <nav class="navbar navbar-expand-lg bg-light border-bottom border-danger shadow-sm py-2">
-    <div class="container-fluid">
-
-      <!-- Logo + Titre intégré -->
-      <a class="navbar-brand d-flex align-items-center gap-2" [routerLink]="['/']">
-        <img src="assets/images/logo-kanji-arena.png" alt="Kanji Master" height="100" class="rounded shadow-sm">
-        <span class="text-danger fs-5">Kanji-Arena • </span>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger py-2">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" [routerLink]="['/']">
+        <img src="assets/images/logo-kanji-arena-min.png" height="48" alt="Kanji Arena" class="logo-shadow" />
       </a>
 
-      <!-- Bouton mobile -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Contenu collapsible -->
-      <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarContent">
+      <div class="collapse navbar-collapse" id="navbarContent">
 
-        <!-- Liens centraux -->
-        <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center gap-3 w-100">
-          <li class="nav-item">
-            <span class="nav-link text-dark fw-semibold"></span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold text-decoration-underline" [routerLink]="['/games/classic']"
-              routerLinkActive="active">Classic</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold text-decoration-underline" [routerLink]="['/games/reverse']"
-              routerLinkActive="active">Reverse</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold text-decoration-underline" [routerLink]="['/ideas']"
-              routerLinkActive="active">À venir...</a>
-          </li>
-        </ul>
+        <!-- NAV CENTER -->
+        <div class="kanji-nav-center mx-auto">
+          <div class="kanji-callout text-danger fw-bold small mb-2">🔥 Choisis ton arène et affronte nos gladiateurs :</div>
+          <ul class="kanji-link-group d-flex flex-row align-items-center justify-content-center gap-3">
+            <li class="kanji-link-item">
+              <a class="kanji-button" [routerLink]="['/games/classic']" routerLinkActive="active">
+                <i class="bi bi-controller"></i> Classic
+              </a>
+            </li>
+            <li class="kanji-link-item">
+              <a class="kanji-button" [routerLink]="['/games/reverse']" routerLinkActive="active">
+                <i class="bi bi-arrow-repeat"></i> Reverse
+              </a>
+            </li>
+            <li class="kanji-link-item">
+              <a class="kanji-button" [routerLink]="['/ideas']" routerLinkActive="active">
+                <i class="bi bi-lightbulb"></i> À venir...
+              </a>
+            </li>
+          </ul>
+        </div>
 
-        <!-- Menu utilisateur à droite -->
-        <ul class="navbar-nav ms-auto d-flex align-items-center gap-2">
+        <!-- NAV RIGHT -->
+        <ul class="navbar-nav ms-auto d-flex flex-column gap-2">
+          <!-- Utilisateur non connecté -->
           @if (!username) {
           <li class="nav-item">
-            <a class="btn btn-outline-danger fw-bold" [routerLink]="['/register']"
-              routerLinkActive="active">Inscription</a>
+            <a class="btn btn-outline-final" [routerLink]="['/register']">
+              <i class="bi bi-person-plus"></i> Inscription </a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-danger fw-bold" [routerLink]="['/login']" routerLinkActive="active">Connexion</a>
+            <a class="btn btn-outline-final" [routerLink]="['/login']">
+              <i class="bi bi-box-arrow-in-right"></i> Connexion </a>
           </li>
           } @else {
-          <!-- Bouton Mon compte avec retour à la ligne entre username et Mon compte -->
+          <!-- Utilisateur connecté -->
           <li class="nav-item">
-            <a class="btn btn-outline-danger fw-bold text-center" [routerLink]="['/dashboard/profile']"
-              routerLinkActive="active">
-              [ {{ username }} ]<br> <!-- Retour à la ligne -->
-              Mon profil
+            <a class="btn btn-outline-final text-center" [routerLink]="['/dashboard/profile']">
+              <i class="bi bi-person-circle"></i> [ {{ username }} ] Mon profil
             </a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-danger fw-bold" (click)="logout()">Déconnexion</a>
+            <a class="btn btn-outline-final" (click)="logout()">
+              <i class="bi bi-box-arrow-in-left"></i> Déconnexion </a>
           </li>
           }
         </ul>
 
       </div>
-
     </div>
   </nav>
 </header>
