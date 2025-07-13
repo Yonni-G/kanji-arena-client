@@ -23,7 +23,7 @@ export class LangService {
       ) {
         this.lang = browserLang;
       } else {
-        this.lang = 'fr';
+        this.lang = 'en'; // Langue par défaut
       }
       // Écrit la langue détectée dans le localStorage
       localStorage.setItem('lang', this.lang);

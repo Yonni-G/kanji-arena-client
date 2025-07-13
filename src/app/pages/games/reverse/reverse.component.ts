@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { GameService } from '../../../services/game.service';
 import { Card } from '../../../models/Card';
-import { UpperCasePipe } from '@angular/common';
-import { ChronometerComponent } from '../../../components/games/chronometer/chronometer.component';
+
+
 import { ChronoService } from '../../../services/chrono.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GameMode } from '../../../models/GameMode';
@@ -12,7 +12,7 @@ import { LangService } from '../../../services/lang.service';
 
 @Component({
   selector: 'app-reverse',
-  imports: [UpperCasePipe, ChronometerComponent, TranslateModule],
+  imports: [TranslateModule],
   templateUrl: './reverse.component.html',
   styleUrl: './reverse.component.css',
 })
