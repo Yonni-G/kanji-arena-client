@@ -10,10 +10,13 @@ import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../../../models/user';
 import { finalize } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
+
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

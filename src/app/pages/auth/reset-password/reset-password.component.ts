@@ -16,10 +16,12 @@ import { MessageService } from '../../../services/message.service';
 import { AuthService } from '../../../services/auth.service';
 import { passwordMatchValidator } from '../../../validators/passwordMatchValidator';
 import { finalize } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.css',
 })

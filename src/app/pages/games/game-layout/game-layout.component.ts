@@ -18,6 +18,8 @@ import { Card } from '../../../models/Card';
 import { NgClass } from '@angular/common';
 import { ChronoService } from '../../../services/chrono.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
 
 @Component({
   selector: 'app-game-layout',
@@ -29,6 +31,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ModalComponent,
     ChronometerComponent,
     NgClass,
+    TranslateModule,
   ],
   templateUrl: './game-layout.component.html',
   styleUrl: './game-layout.component.css',
@@ -56,6 +59,7 @@ export class GameLayoutComponent {
   }
 
   ngOnInit(): void {
+
     // 1. Au chargement initial (F5)
     this.setTitleFromRoute(this.route);
 

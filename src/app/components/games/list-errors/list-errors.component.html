@@ -1,7 +1,7 @@
 @if(listErrors.length) {
 <div class="m-4">
   <p class="fw-bold text-danger text-decoration-underline mb-4">
-    <i class="bi bi-chevron-down me-2"></i>Liste de vos erreurs
+    <i class="bi bi-chevron-down me-2"></i>{{ 'LIST_ERRORS.TITLE' | translate }}
   </p>
 
   <div class="row gx-4 gy-4">
@@ -25,7 +25,8 @@
           </div>
 
           <!-- Réponses -->
-          <div class="border-start ps-3 ms-2 d-flex flex-column justify-content-center text-uppercase" style="font-size: 1.2rem;">
+          <div class="border-start ps-3 ms-2 d-flex flex-column justify-content-center text-uppercase"
+            style="font-size: 1.2rem;">
             <div class="text-danger fw-bold mb-2">
               {{ err.unCorrect }}
             </div>

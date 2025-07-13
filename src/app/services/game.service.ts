@@ -108,7 +108,7 @@ export class GameService {
                 correct: card?.choices[response.correctIndex].label,
                 unCorrect: card?.choices[choiceIndex].label,
               });
-              console.log(this._listErrors);
+              //console.log(this._listErrors);
             }
             
             this.loadingCheckState = 'masquer les boutons';

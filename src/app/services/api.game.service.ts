@@ -3,16 +3,22 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { GameMode } from '../models/GameMode';
+import { BaseApiService } from './base-api.service';
+import { LangService } from './lang.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiGameService {
-  constructor(private readonly http: HttpClient) {}
+export class ApiGameService extends BaseApiService {
+    private readonly http: HttpClient;
+    constructor(http: HttpClient, langService: LangService) {
+      super(langService);
+      this.http = http;
+    }
 
   startGame(gameMode: GameMode): Observable<any> {
     return this.http.get<any>(
-      `${environment.apiUrl}/games/${gameMode}/start`,
+      `${this.apiUrl}/games/${gameMode}/start`,
       { withCredentials: true } // 👈 ajoute les cookies
     );
   }
@@ -23,7 +29,7 @@ export class ApiGameService {
     choiceIndex: number
   ): Observable<any> {
     return this.http.post<any>(
-      `${environment.apiUrl}/games/${gameMode}/checkAnswer`,
+      `${this.apiUrl}/games/${gameMode}/checkAnswer`,
       { gameToken, choiceIndex },
       { withCredentials: true } // 👈 ajoute les cookies
     );
@@ -31,7 +37,7 @@ export class ApiGameService {
 
   loadRanking(gameMode: GameMode): Observable<any> {
     return this.http.get<any>(
-      `${environment.apiUrl}/games/${gameMode}/ranking`,
+      `${this.apiUrl}/games/${gameMode}/ranking`,
       { withCredentials: true } // 👈 ajoute les cookies
     );
   }

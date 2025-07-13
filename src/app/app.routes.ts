@@ -18,42 +18,42 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
-    data: { title: 'À propos de Kanji-Arena' },
+    data: { title: 'ROUTES.ABOUT' },
   },
   {
     path: 'contact',
     component: ContactComponent,
-    data: { title: 'Contactez-nous' },
+    data: { title: 'ROUTES.CONTACT' },
   },
   {
     path: '',
     component: HomeComponent,
-    data: { title: 'Quizz de Kanji Japonais - Jeux en ligne' },
+    data: { title: 'ROUTES.HOME' },
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: { title: 'Connexion à votre compte' },
+    data: { title: 'ROUTES.LOGIN' },
   },
   {
     path: 'register',
     component: RegisterComponent,
-    data: { title: 'Créer votre compte' },
+    data: { title: 'ROUTES.REGISTER' },
   },
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
-    data: { title: 'Oubli de mot de passe' },
+    data: { title: 'ROUTES.FORGOT_PASSWORD' },
   },
   {
     path: 'reset-password/:resettoken',
     component: ResetPasswordComponent,
-    data: { title: 'Recréez votre mot de passe' },
+    data: { title: 'ROUTES.RESET_PASSWORD' },
   },
   {
     path: 'dashboard/profile',
     component: ProfileComponent,
-    data: { title: 'Votre profil' },
+    data: { title: 'ROUTES.PROFILE' },
     canActivate: [authGuard],
   },
   {
@@ -64,26 +64,28 @@ export const routes: Routes = [
         path: 'classic',
         component: ClassicComponent,
         data: {
-          title: 'Jeu Classic mode',
-          gameName: 'Classic',
+          title: 'ROUTES.CLASSIC',
+          gameName: 'ROUTES.CLASSIC_NAME',
           gameMode: GameMode.CLASSIC,
-          gameDesc:
-            'Devinez le sens associé à 10 Kanji le plus rapidement possible',
+          gameDesc: 'ROUTES.CLASSIC_DESC',
         },
       },
       {
         path: 'reverse',
         component: ReverseComponent,
         data: {
-          title: 'Jeu Reverse mode',
-          gameName: 'Reverse',
+          title: 'ROUTES.REVERSE',
+          gameName: 'ROUTES.REVERSE_NAME',
           gameMode: GameMode.REVERSE,
-          gameDesc:
-            'Devinez 10 Kanji associés au sens proposé le + rapidement possible !',
+          gameDesc: 'ROUTES.REVERSE_DESC',
         },
       },
-      { path: '', redirectTo: 'classic', pathMatch: 'full' }, // fallback
+      { path: '', redirectTo: 'classic', pathMatch: 'full' },
     ],
   },
-  { path: 'ideas', component: IdeasComponent, data: { title: 'Idées de prochains jeux' } },
+  {
+    path: 'ideas',
+    component: IdeasComponent,
+    data: { title: 'ROUTES.IDEAS' },
+  },
 ];

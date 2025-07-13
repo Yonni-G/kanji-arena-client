@@ -10,9 +10,11 @@ import { MessageService } from '../../../services/message.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../../../models/user';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { Country, CountrySelectComponent } from '@wlucha/ng-country-select';
 import { countryObjectValidator } from '../../../validators/countryObjectValidator';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +23,7 @@ import { countryObjectValidator } from '../../../validators/countryObjectValidat
     RouterLink,
     RouterLinkActive,
     CountrySelectComponent,
+    TranslateModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -30,13 +33,22 @@ export class RegisterComponent {
   private readonly authService: AuthService = inject(AuthService);
   private readonly router = inject(Router);
 
+  lang: 'fr' | 'en' | 'ja' = 'en';
+  private langSub?: Subscription;
+
+  constructor(private langService: LangService) {
+    // Souscrit à la langue pour que le select soit toujours à jour
+    this.langSub = this.langService.lang$.subscribe((lang) => {
+      this.lang = lang;
+    });
+  }
+
   loading = false;
 
   // Déclaration du contrôle
   nationalityControl = new FormControl<Country | null>(null, {
     nonNullable: true,
     validators: [Validators.required, countryObjectValidator],
-
   });
 
   form = new FormGroup(

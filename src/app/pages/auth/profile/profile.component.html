@@ -1,23 +1,20 @@
 <section class="container mt-4 mb-5">
     <div class="mb-4 text-center">
         <i class="bi bi-person-badge-fill display-3 text-danger mb-2"></i>
-        <h2 class="fw-bold text-danger display-5">Votre profil</h2>
+        <h2 class="fw-bold text-danger display-5">{{ 'PROFILE.TITLE' | translate }}</h2>
     </div>
 
     <div class="mb-4">
         <h5 class="fw-semibold mb-3">
             <i class="bi bi-bell-fill text-warning me-2"></i>
-            Alertes par mail : Score battu
+            {{ 'PROFILE.ALERT_TITLE' | translate }}
         </h5>
         <p class="text-muted fst-italic mb-2">
-            Pour créer de l'engagement et stimuler la compétition, vous pouvez être averti par email dès lors qu’un
-            autre joueur
-            battra votre meilleur score sur un des jeux de Kanji-Arena !
-            Cette fonctionnalité s’applique <strong>uniquement aux 100 premiers joueurs des différents
-                classements</strong>.
+            {{ 'PROFILE.ALERT_DESC1' | translate }}
+            <strong>{{ 'PROFILE.ALERT_DESC2' | translate }}</strong>.
         </p>
         <p class="text-muted fst-italic mb-0">
-            Vous pouvez l’activer ou la désactiver ci-dessous :
+            {{ 'PROFILE.ALERT_DESC3' | translate }}
         </p>
     </div>
 
@@ -25,12 +22,9 @@
         <mat-slide-toggle [checked]="alertOutOfRanking" (change)="onToggle($event)" color="primary">
             <i class="bi bi-envelope-fill text-danger me-2"></i>
             @if (!alertOutOfRanking) {
-            <span class="text-danger">Je ne suis pas alerté par email dès lors qu’un autre joueur bat
-            mon meilleur score
-            (si je fais partie du TOP 10)</span>
+            <span class="text-danger">{{ 'PROFILE.ALERT_OFF' | translate }}</span>
             } @else {
-            <span class="text-success">Je suis alerté par email dès lors qu'un autre joueur bat mon
-            meilleur score</span>
+            <span class="text-success">{{ 'PROFILE.ALERT_ON' | translate }}</span>
             }
         </mat-slide-toggle>
     </div>

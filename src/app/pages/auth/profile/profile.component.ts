@@ -2,9 +2,11 @@ import { Component, inject } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ApiAuthService } from '../../../services/api.auth.service';
 import { MessageService } from '../../../services/message.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
 @Component({
   selector: 'app-profile',
-  imports: [MatSlideToggleModule],
+  imports: [MatSlideToggleModule, TranslateModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -12,7 +14,9 @@ export class ProfileComponent {
   private readonly messageService: MessageService = inject(MessageService);
   alertOutOfRanking = false;
 
-  constructor(private readonly apiAuthService: ApiAuthService) {}
+  constructor(
+    private readonly apiAuthService: ApiAuthService
+  ) {}
 
   onToggle(event: any) {
     const newValue = event.checked;
@@ -32,6 +36,7 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
+    
     // on va interroger notre API pour obtenir le alertOutOfRanking de notre user
     this.apiAuthService.getAlertOutOfRanking().subscribe({
       next: (response) => {

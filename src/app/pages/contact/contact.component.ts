@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonService } from '../../services/common.service';
 import { MessageService } from '../../services/message.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../services/lang.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'], // si tu as des styles spécifiques
-  imports: [ReactiveFormsModule], // si tu utilises des modules Angular spécifiques, ajoute-les ici
+  imports: [ReactiveFormsModule, TranslateModule], // si tu utilises des modules Angular spécifiques, ajoute-les ici
 })
 export class ContactComponent implements OnInit {
   constructor(
@@ -15,11 +22,12 @@ export class ContactComponent implements OnInit {
     private readonly commonService: CommonService,
     private readonly messageService: MessageService
   ) {}
-  
+
   form!: FormGroup;
   loading = false;
 
   ngOnInit(): void {
+
     this.form = this.fb.group({
       name: [
         '',
@@ -38,11 +46,15 @@ export class ContactComponent implements OnInit {
           ),
         ],
       ],
-      message: ['', [Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(500)]],
+      message: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(500),
+        ],
+      ],
     });
-
   }
 
   onSubmit(): void {

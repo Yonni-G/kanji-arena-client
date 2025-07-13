@@ -3,16 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
+import { LangService } from './lang.service';
+import { BaseApiService } from './base-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiAuthService {
-  constructor(private readonly http: HttpClient) {}
+export class ApiAuthService extends BaseApiService {
+  private readonly http: HttpClient;
+  constructor(http: HttpClient, langService: LangService) {
+    super(langService);
+    this.http = http;
+  }
 
   setAlertOutOfRanking(alertOutOfRanking: boolean) {
     return this.http.post<any>(
-      `${environment.apiUrl}/users/set-alert-out-of-ranking`,
+      `${this.apiUrl}/users/set-alert-out-of-ranking`,
       {
         alertOutOfRanking,
       },
@@ -20,21 +26,18 @@ export class ApiAuthService {
         withCredentials: true,
       }
     );
-  }  
+  }
 
   getAlertOutOfRanking() {
-  return this.http.get<any>(
-    `${environment.apiUrl}/users/get-alert-out-of-ranking`,
-    {
+    return this.http.get<any>(`${this.apiUrl}/users/get-alert-out-of-ranking`, {
       withCredentials: true,
-    }
-  );
+    });
   }
 
   // on interroge l'api pour savoir si le resetoken existe et est valide
   checkResetToken(resetToken: string): Observable<any> {
     return this.http.post<any>(
-      `${environment.apiUrl}/users/check-reset-token`,
+      `${this.apiUrl}/users/check-reset-token`,
       { resetToken },
       {
         withCredentials: true,
@@ -43,23 +46,19 @@ export class ApiAuthService {
   }
 
   forgotPassword(user: User): Observable<any> {
-    return this.http.post<any>(
-      `${environment.apiUrl}/users/forgot-password`,
-      user,
-      {
-        withCredentials: true,
-      }
-    );
+    return this.http.post<any>(`${this.apiUrl}/users/forgot-password`, user, {
+      withCredentials: true,
+    });
   }
 
   register(user: User): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/users/register`, user, {
+    return this.http.post<any>(`${this.apiUrl}/users/register`, user, {
       withCredentials: true,
     });
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/users/login`, user, {
+    return this.http.post<any>(`${this.apiUrl}/users/login`, user, {
       withCredentials: true,
     });
   }
@@ -70,7 +69,7 @@ export class ApiAuthService {
     confirmPassword: string
   ): Observable<any> {
     return this.http.post<any>(
-      `${environment.apiUrl}/users/reset-password`,
+      `${this.apiUrl}/users/reset-password`,
       { token, password, confirmPassword },
       { withCredentials: true }
     );

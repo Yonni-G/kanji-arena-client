@@ -1,6 +1,4 @@
-<!-- Si best chrono utilisateur, on l'affiche ici -->
 @if (userBestChrono) {
-
 <div class="alert alert-light border border-danger mx-auto my-3 py-3 px-3 px-md-4 text-center w-100"
     style="max-width: 420px;">
     <div class="d-flex flex-column align-items-center gap-3">
@@ -8,14 +6,14 @@
         <div class="d-flex align-items-center gap-2 justify-content-center">
             <i class="bi bi-stopwatch text-danger fs-3"></i>
             <span class="fw-semibold">
-                Votre meilleur chrono :
+                {{ 'RANKING.BEST_CHRONO' | translate }}
                 <span class="text-danger fs-5">{{ userBestChrono.chronoValue / 1000 | chronoFormat }}</span>
             </span>
         </div>
         <!-- Ligne 2 : Rang -->
         <div class="d-flex align-items-center gap-2 justify-content-center">
             <span class="fw-semibold">
-                Rang :
+                {{ 'RANKING.RANK' | translate }}
                 <span class="text-dark fs-5">#{{ userBestChrono.ranking }}</span>
                 <small class="text-muted">/ {{ metrics.totalChronos }}</small>
             </span>
@@ -24,7 +22,7 @@
                 class="badge bg-warning text-dark ms-2 d-flex align-items-center px-3 py-2 shadow-lg border border-3 border-warning"
                 style="font-size: 1.1rem;">
                 <i class="bi bi-trophy-fill me-2 fs-5 text-warning"></i>
-                1<sup>er</sup> 🥇
+                {{ 'RANKING.FIRST' | translate }}
             </span>
             }
             @else if (userBestChrono.ranking === 2) {
@@ -32,7 +30,7 @@
                 class="badge bg-secondary text-white ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-secondary"
                 style="font-size: 1rem;">
                 <i class="bi bi-trophy-fill me-2 fs-6 text-white"></i>
-                2<sup>ème</sup> 🥈
+                {{ 'RANKING.SECOND' | translate }}
             </span>
             }
             @else if (userBestChrono.ranking === 3) {
@@ -40,25 +38,25 @@
                 class="badge bg-dark text-warning ms-2 d-flex align-items-center px-3 py-2 shadow border border-3 border-dark"
                 style="font-size: 0.95rem;">
                 <i class="bi bi-trophy-fill me-2 fs-6 text-warning"></i>
-                3<sup>ème</sup> 🥉
+                {{ 'RANKING.THIRD' | translate }}
             </span>
             }
         </div>
     </div>
 </div>
-
-
 }
-
-<!-- Classement général -->
+<!-- classement général -->
 @if (chronos?.length) {
 <div class="container mb-2 my-0 p-0">
     <div class="card shadow-sm">
         <button class="card-header d-flex justify-content-between align-items-center bg-light border-0 text-start"
             type="button" data-bs-toggle="collapse" data-bs-target="#classementTable" aria-expanded="false"
             aria-controls="classementTable">
-            <span><i class="bi bi-trophy-fill text-warning me-2"></i>Classement général<small> • {{ metrics.nbLimitRanking }}
-                    premiers</small></span>
+            <span>
+                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                {{ 'RANKING.GENERAL_TITLE' | translate }}
+                <small> • {{ metrics.nbLimitRanking }} {{ 'RANKING.TOP' | translate }}</small>
+            </span>
             <i class="bi bi-chevron-down"></i>
         </button>
 
@@ -68,9 +66,9 @@
                     <thead class="table-light sticky-top">
                         <tr>
                             <th>#</th>
-                            <th>Nom</th>
-                            <th>Temps</th>
-                            <th>Date</th>
+                            <th>{{ 'RANKING.NAME' | translate }}</th>
+                            <th>{{ 'RANKING.TIME' | translate }}</th>
+                            <th>{{ 'RANKING.DATE' | translate }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,13 +88,13 @@
                             <td class="fw-bold text-primary">
                                 {{ c.chronoValue / 1000 | chronoFormat }}
                             </td>
-
-                            <td>{{ c.createdAt | date:'dd/MM/yyyy' }}</td>
+                            <td [title]="c.createdAt | date:'dd/MM/yyyy HH:mm:ss'">
+                                {{ c.createdAt | date:'dd/MM/yyyy' }}
+                            </td>
 
                         </tr>
                         }
                     </tbody>
-
                 </table>
             </div>
         </div>

@@ -1,13 +1,12 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
 <main class="container my-5">
     <!-- Titre principal -->
     <section class="text-center mb-5">
         <div class="mb-3">
             <i class="bi bi-person-circle display-3 text-danger"></i>
         </div>
-        <h1 class="fw-bold text-danger mb-3">À propos</h1>
+        <h1 class="fw-bold text-danger mb-3">{{ 'ABOUT.TITLE' | translate }}</h1>
         <p class="text-muted fs-5">
-            Découvrez l'humain derrière <strong>Kanji-Arena</strong>.
+            {{ 'ABOUT.SUBTITLE' | translate }}
         </p>
     </section>
 
@@ -22,38 +21,30 @@
             </div>
 
             <p class="fs-5">
-                Bonjour ! Je m'appelle <strong>Yonni</strong>. Je suis développeur web et apprenant en japonais, basé à
-                <strong>Pornic</strong>, en France.
+                {{ 'ABOUT.INTRO' | translate }}
             </p>
 
             <p class="fs-5">
-                J'ai créé <strong>Kanji-Arena</strong> pour rassembler mes deux passions : le développement informatique
-                et l'apprentissage du japonais. Ce que vous voyez ici est une première version du projet, principalement
-                pensée pour les recruteurs — une démonstration concrète de ce que je peux construire avec <span
-                    class="fw-semibold text-primary">Angular</span> et <span
-                    class="fw-semibold text-success">Node.js</span>.
+                {{ 'ABOUT.PASSION' | translate }}
+                <span class="fw-semibold text-primary">Angular</span>
+                {{ 'ABOUT.AND' | translate }}
+                <span class="fw-semibold text-success">Node.js</span>.
             </p>
 
             <p class="fs-5">
-                Le site est actuellement en <strong>version bêta</strong>, ce qui signifie qu’il peut subsister des
-                <strong>bugs</strong>.<br>
-                L’API REST est hébergée chez <strong>render.com</strong> et la base de données utilise <strong>MongoDB
-                    Atlas</strong>.
+                {{ 'ABOUT.BETA' | translate }}
             </p>
 
             <p class="fs-5">
-                Si vous aimez le projet, le meilleur moyen de me soutenir est de le partager avec d'autres passionnés de
-                japonais !
+                {{ 'ABOUT.SUPPORT' | translate }}
             </p>
 
             <p class="fs-5">
-                Concernant <strong>Kanji-Arena</strong>, mon objectif est de le faire connaître au plus grand nombre. Je
-                vais donc bientôt travailler à le rendre <strong>multilingue</strong>, avec le <strong>français</strong>
-                et l’<strong>anglais</strong> dans un premier temps.
+                {{ 'ABOUT.MULTILINGUAL' | translate }}
             </p>
 
             <p class="fs-5">
-                Je prévois également d’ajouter les <strong>drapeaux des joueurs</strong>
+                {{ 'ABOUT.FLAGS' | translate }}
                 <span style="font-size: 1.1rem; vertical-align: middle;">
                     (
                     <span class="fi fi-br me-1"></span>
@@ -61,22 +52,19 @@
                     <span class="fi fi-it"></span>...
                     )
                 </span>
-                dans les classements, de lancer
-                un <strong>classement général</strong> et, à terme, d’organiser un véritable <strong>Championnat du
-                    monde
-                    de Kanji</strong>… rien que ça&nbsp;!
+                {{ 'ABOUT.PLANS' | translate }}
             </p>
 
             <!-- Contact simplifié -->
             <div class="bg-white border rounded-3 p-3 mt-4">
                 <i class="bi bi-envelope-fill text-danger me-2"></i>
-                Pour me contacter, utilisez le
-                <a routerLink="/contact" class="fw-bold text-danger">formulaire de contact</a>.
+                {{ 'ABOUT.CONTACT' | translate }}
+                <a routerLink="/contact" class="fw-bold text-danger">{{ 'ABOUT.CONTACT_FORM' | translate }}</a>.
             </div>
 
             <!-- Réseaux -->
             <div class="mt-4 text-center">
-                <p class="mb-2 text-muted">Retrouvez-moi aussi sur :</p>
+                <p class="mb-2 text-muted">{{ 'ABOUT.SOCIAL' | translate }}</p>
                 <a href="https://twitter.com/yonni" class="btn btn-outline-primary fw-bold me-2" target="_blank">
                     <i class="bi bi-twitter me-1"></i> Twitter
                 </a>

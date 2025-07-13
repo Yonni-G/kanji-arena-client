@@ -2,11 +2,11 @@
     <div class="m-4">
         <h2 class="fw-bold text-danger display-4">
             <i class="bi bi-lightning-charge-fill text-warning"></i>
-            {{ gameName }} <span class="text-dark">mode</span>
+            {{ gameName | translate }} <span class="text-dark">{{ 'GAME.MODE' | translate }}</span>
         </h2>
         <div class="subtitle-highlight">
             <i class="bi bi-stars text-warning me-2"></i>
-            {{ gameDesc }}
+            {{ gameDesc | translate }}
         </div>
     </div>
 </section>
@@ -17,7 +17,7 @@
     <section class="text-center">
         <div class="alert alert-warning small p-0">
             <i class="bi bi-exclamation-triangle-fill fs-5 me-2"></i>
-            <span>Vous n'êtes pas connecté·e !<br /> Vos chronos ne seront pas enregistrés !</span>
+            <span>{{ 'GAME.NOT_AUTH' | translate }}<br />{{ 'GAME.NOT_SAVED' | translate }}</span>
         </div>
     </section>
     }
@@ -29,18 +29,18 @@
         <div class="alert alert-success d-inline-flex align-items-center gap-2 px-4 py-2 mt-3 rounded-pill">
             <i class="bi bi-stopwatch-fill fs-5 align-middle"></i>
             <span class="fw-semibold">
-                Votre chrono : <span class="text-dark">{{ userLiveChrono!.chronoValue / 1000 | chronoFormat }}</span>
+                {{ 'GAME.YOUR_TIME' | translate }} <span class="text-dark">{{ userLiveChrono!.chronoValue / 1000 |
+                    chronoFormat }}</span>
             </span>
             <span class="mx-2">|</span>
             <span class="fw-semibold">
-                Classement : #<span class="text-dark">{{ userLiveChrono!.ranking }}</span>
+                {{ 'GAME.RANKING' | translate }} #<span class="text-dark">{{ userLiveChrono!.ranking }}</span>
             </span>
         </div>
         }
     </section>
 
     <!-- PARTIE HAUTE D'UN JEU -->
-    <!-- Card -->
     <div id="quiz-card" class="card game-width" [ngClass]="feedbackClass()"
         style="border: 1px solid #ccc; border-radius: 10px;">
         <!-- Header -->
@@ -54,27 +54,28 @@
                 </div>
                 <!-- Other Counters -->
                 <div class="d-flex flex-column text-end ms-auto">
-                    <span class="badge bg-danger mb-1" style="font-size: 0.9rem;"><i class="bi bi-x-octagon-fill"></i>
-                        Erreurs : {{ counters.errors }}</span>
-                    <span class="badge bg-info" style="font-size: 0.9rem;"><i class="bi bi-list-ol"></i> Total : {{
-                        counters.total }}</span>
+                    <span class="badge bg-danger mb-1" style="font-size: 0.9rem;">
+                        <i class="bi bi-x-octagon-fill"></i>
+                        {{ 'GAME.ERRORS' | translate }} {{ counters.errors }}
+                    </span>
+                    <span class="badge bg-info" style="font-size: 0.9rem;">
+                        <i class="bi bi-list-ol"></i>
+                        {{ 'GAME.TOTAL' | translate }} {{ counters.total }}
+                    </span>
                 </div>
             </div>
-            <!-- Separator -->
             <hr style="border-top: 1px solid #ccc; margin: 0.3rem 0;">
-            <!-- Chronometer -->
             <div class="mt-2 mb-2">
                 <app-chronometer></app-chronometer>
             </div>
-            <!-- Restart Button -->
             <button type="button" (click)="onStart()" class="btn btn-outline-danger fw-bold w-100">
                 @if(isLoading) {
                 <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                Chargement...
+                {{ 'GAME.LOADING' | translate }}
                 }
                 @if(!isLoading) {
                 <i class="bi" [ngClass]="card ? 'bi-x-circle' : 'bi-play-circle'"></i>
-                {{ card ? "Arrêter la partie !" : "Démarrer la partie !" }}
+                {{ card ? ('GAME.STOP' | translate) : ('GAME.START' | translate) }}
                 }
             </button>
         </div>
@@ -84,40 +85,38 @@
 
 <app-list-errors [gameMode]="gameMode"></app-list-errors>
 
-<app-modal [title]="'🎉 Bravo ! Partie terminée !'" [isOpen]="showModal" (close)="closeModal()">
+<app-modal [title]="'🎉 ' + ('GAME.FINISHED_TITLE' | translate)" [isOpen]="showModal" (close)="closeModal()">
     @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
     <div class="text-center px-3">
-        <!-- Score -->
         <div class="my-3">
-            <p class="text-muted mb-0">Erreurs : {{ counters.errors }} | Total tentatives : {{ counters.total }}</p>
+            <p class="text-muted mb-0">
+                {{ 'GAME.ERRORS' | translate }} {{ counters.errors }} | {{ 'GAME.TOTAL_ATTEMPTS' | translate }} {{
+                counters.total }}
+            </p>
         </div>
         @if(userLiveChrono.chronoValue != null) {
-        <!-- Chrono -->
         <div class="my-3">
-            <h5 class="text-primary">Temps réalisé :</h5>
+            <h5 class="text-primary">{{ 'GAME.TIME_DONE' | translate }}</h5>
             <div class="fs-3 text-danger fw-semibold">
                 {{ userLiveChrono.chronoValue / 1000 | chronoFormat }}
             </div>
         </div>
         }
-        <!-- Classement -->
         @if (userLiveChrono.ranking != null) {
         <div class="my-3">
-            <h5 class="text-primary">Votre classement :</h5>
+            <h5 class="text-primary">{{ 'GAME.YOUR_RANKING' | translate }}</h5>
             <div class="fs-4 fw-bold text-dark">#{{ userLiveChrono.ranking }}</div>
         </div>
         }
-        <!-- Message de non-authentification -->
         @if (!authService.isAuthenticated()) {
         <div class="alert alert-warning d-flex align-items-center justify-content-center gap-2 mt-3">
             <i class="bi bi-exclamation-triangle-fill fs-5"></i>
-            <span>Connectez-vous pour enregistrer vos scores !</span>
+            <span>{{ 'GAME.CONNECT_TO_SAVE' | translate }}</span>
         </div>
         }
-        <!-- Boutons -->
         <div class="mt-4 d-flex flex-column gap-2">
             <button class="btn btn-secondary" (click)="closeModal()">
-                Fermer
+                {{ 'GAME.CLOSE' | translate }}
             </button>
         </div>
     </div>

@@ -5,10 +5,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
 import { finalize } from 'rxjs';
+import { LangService } from '../../../services/lang.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css',
 })
@@ -24,7 +26,6 @@ export class ForgotPasswordComponent {
       Validators.required,
       Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
     ]),
-
   });
 
   onSubmit() {
@@ -41,27 +42,29 @@ export class ForgotPasswordComponent {
 
       this.loading = true;
       // on va interroger notre api via le service authService
-      this.authService.forgotPassword(user)
-             .pipe(
-               finalize(() => {
-                 this.loading = false; // ← toujours exécuté
-               })
-             ).subscribe({
-        next: (response) => {
-          this.form.reset();
-          this.messageService.setMessage(
-            { text: response.message, type: 'success' },
-            5000
-          );
-        },
-        error: (error) => {
-          console.error('Password reset failed', error);          
-          this.messageService.setMessage({
-            text: error.error.message,
-            type: 'error',
-          });
-        },
-      });
+      this.authService
+        .forgotPassword(user)
+        .pipe(
+          finalize(() => {
+            this.loading = false; // ← toujours exécuté
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            this.form.reset();
+            this.messageService.setMessage(
+              { text: response.message, type: 'success' },
+              5000
+            );
+          },
+          error: (error) => {
+            console.error('Password reset failed', error);
+            this.messageService.setMessage({
+              text: error.error.message,
+              type: 'error',
+            });
+          },
+        });
     } else {
       //console.log('Form is invalid');
       this.messageService.setMessage({

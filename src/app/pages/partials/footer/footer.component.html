@@ -4,13 +4,13 @@
       <!-- Liens rapides sur une seule ligne -->
       <nav>
         <a [routerLink]="['/']" class="footer-link d-inline-flex align-items-center mx-2">
-          <i class="bi bi-house-door-fill me-1"></i>Accueil
+          <i class="bi bi-house-door-fill me-1"></i>{{ 'FOOTER.HOME' | translate }}
         </a>
         <a [routerLink]="['/about']" class="footer-link d-inline-flex align-items-center mx-2">
-          <i class="bi bi-info-circle-fill me-1"></i>À propos
+          <i class="bi bi-info-circle-fill me-1"></i>{{ 'FOOTER.ABOUT' | translate }}
         </a>
         <a [routerLink]="['/contact']" class="footer-link d-inline-flex align-items-center mx-2">
-          <i class="bi bi-envelope-fill me-1"></i>Contact
+          <i class="bi bi-envelope-fill me-1"></i>{{ 'FOOTER.CONTACT' | translate }}
         </a>
         <a href="https://twitter.com/yonni" class="btn btn-outline-danger btn-sm btn-floating mx-1" role="button"
           aria-label="Twitter">
@@ -22,7 +22,7 @@
         class="btn btn-warning rounded-pill d-flex align-items-center gap-2 px-3 py-2 shadow-sm"
         style="font-weight:600;">
         <i class="bi bi-cup-hot-fill"></i>
-        Offrez-moi un café !
+        {{ 'FOOTER.BUY_ME_COFFEE' | translate }}
       </a>
     </div>
   </div>

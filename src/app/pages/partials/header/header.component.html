@@ -1,6 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger py-2">
     <div class="container">
+      <!-- Logo -->
       <a class="navbar-brand d-flex align-items-center gap-3" [routerLink]="['/']">
         <img src="assets/images/logo-kanji-arena-min.png" height="48" alt="Kanji Arena" class="logo-shadow" />
       </a>
@@ -11,24 +12,25 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-
         <!-- NAV CENTER -->
         <div class="kanji-nav-center mx-auto">
-          <div class="kanji-callout text-danger fw-bold small mb-2">🔥 Choisis ton arène et affronte nos gladiateurs :</div>
+          <div class="kanji-callout text-danger fw-bold small mb-2">
+            {{ 'HEADER.CALLOUT' | translate }}
+          </div>
           <ul class="kanji-link-group d-flex flex-row align-items-center justify-content-center gap-3">
             <li class="kanji-link-item">
               <a class="kanji-button" [routerLink]="['/games/classic']" routerLinkActive="active">
-                <span style="font-size: 1.2em; vertical-align: middle;">漢</span> Classic
+                <span style="font-size: 1.2em;">漢</span> {{ 'HEADER.CLASSIC' | translate }}
               </a>
             </li>
             <li class="kanji-link-item">
               <a class="kanji-button" [routerLink]="['/games/reverse']" routerLinkActive="active">
-                <span style="font-size: 1.2em; vertical-align: middle;">逆</span> Reverse
+                <span style="font-size: 1.2em;">逆</span> {{ 'HEADER.REVERSE' | translate }}
               </a>
             </li>
             <li class="kanji-link-item">
               <a class="kanji-button" [routerLink]="['/ideas']" routerLinkActive="active">
-                <i class="bi bi-lightbulb"></i> À venir...
+                <i class="bi bi-lightbulb"></i> {{ 'HEADER.COMING_SOON' | translate }}
               </a>
             </li>
           </ul>
@@ -36,30 +38,59 @@
 
         <!-- NAV RIGHT -->
         <ul class="navbar-nav ms-auto d-flex flex-column gap-2">
-          <!-- Utilisateur non connecté -->
           @if (!username) {
           <li class="nav-item">
             <a class="btn btn-outline-final" [routerLink]="['/register']">
-              <i class="bi bi-person-plus"></i> Inscription </a>
+              <i class="bi bi-person-plus"></i> {{ 'HEADER.REGISTER' | translate }}
+            </a>
           </li>
           <li class="nav-item">
             <a class="btn btn-outline-final" [routerLink]="['/login']">
-              <i class="bi bi-box-arrow-in-right"></i> Connexion </a>
+              <i class="bi bi-box-arrow-in-right"></i> {{ 'HEADER.LOGIN' | translate }}
+            </a>
           </li>
           } @else {
-          <!-- Utilisateur connecté -->
           <li class="nav-item">
             <a class="btn btn-outline-final text-center" [routerLink]="['/dashboard/profile']">
-              <i class="bi bi-person-circle"></i> [ {{ username }} ] Mon profil
+              <i class="bi bi-person-circle"></i> [ {{ username }} ] {{ 'HEADER.PROFILE' | translate }}
             </a>
           </li>
           <li class="nav-item">
             <a class="btn btn-outline-final" (click)="logout()">
-              <i class="bi bi-box-arrow-in-left"></i> Déconnexion </a>
+              <i class="bi bi-box-arrow-in-left"></i> {{ 'HEADER.LOGOUT' | translate }}
+            </a>
           </li>
           }
+          <li class="nav-item">
+            <!-- Sélecteur de langue centré sous les boutons -->
+            <div class="w-100 text-center">
+              <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center gap-2" type="button"
+                  id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span [ngClass]="flagClass"></span>
+                  <span class="d-none d-md-inline">{{ langLabel }}</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"
+                      (click)="setLang('en'); $event.preventDefault()">
+                      <span class="fi fi-gb"></span> English
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"
+                      (click)="setLang('fr'); $event.preventDefault()">
+                      <span class="fi fi-fr"></span> Français
+                    </a>
+                  </li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="#" (click)="setLang('ja'); $event.preventDefault()">
+                    <span class="fi fi-jp"></span> 日本語
+                  </a>
+                </ul>
+              </div>
+            </div>
+          </li>
         </ul>
-
       </div>
     </div>
   </nav>

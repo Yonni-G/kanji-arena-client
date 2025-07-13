@@ -5,15 +5,17 @@ import { Card } from '../../../models/Card';
 import { UpperCasePipe } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { GameMode } from '../../../models/GameMode';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangService } from '../../../services/lang.service';
 
 @Component({
   selector: 'app-classic',
-  imports: [UpperCasePipe],
+  imports: [UpperCasePipe, TranslateModule],
   templateUrl: './classic.component.html',
   styleUrl: './classic.component.css',
 })
 export class ClassicComponent {
- 
+
   authService = inject(AuthService);
   gameService = inject(GameService);
 
@@ -30,6 +32,7 @@ export class ClassicComponent {
   }
 
   ngOnInit() {
+
     this.gameService.initGame(GameMode.CLASSIC);
     this.gameService.resetGame();
     this.gameService.resetPostGameDatas();

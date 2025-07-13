@@ -4,9 +4,9 @@
         <div class="mb-3">
             <i class="bi bi-person-circle display-3 text-danger"></i>
         </div>
-        <h1 class="fw-bold text-danger mb-3">Connexion</h1>
+        <h1 class="fw-bold text-danger mb-3">{{ 'LOGIN.TITLE' | translate }}</h1>
         <p class="text-muted fs-5">
-            Connectez-vous pour entrer dans la Kanji-Arena et défiez nos gladiateurs du Kanji du monde entier !
+            {{ 'LOGIN.SUBTITLE' | translate }}
         </p>
     </section>
 
@@ -16,33 +16,32 @@
             <form (submit)="onSubmit()" [formGroup]="form" class="bg-light p-4 rounded-4 shadow">
                 <div class="mb-3">
                     <label for="email" class="form-label fw-bold text-danger">
-                        <i class="bi bi-envelope-fill me-2"></i>Adresse email
+                        <i class="bi bi-envelope-fill me-2"></i>{{ 'LOGIN.EMAIL_LABEL' | translate }}
                     </label>
                     <div class="input-group">
                         <span class="input-group-text bg-white"><i class="bi bi-at text-danger"></i></span>
                         <input formControlName="email" type="text" id="email" name="email" class="form-control"
-                            placeholder="Votre adresse email" required>
+                            [placeholder]="'LOGIN.EMAIL_PLACEHOLDER' | translate" required>
                     </div>
                     @if(form.get("email")?.touched && form.get("email")?.invalid) {
                     @if(form.get('email')?.hasError('pattern')) {
-                    <small class="text-danger fst-italic">Saisissez une adresse email correcte</small>
+                    <small class="text-danger fst-italic">{{ 'LOGIN.EMAIL_ERROR' | translate }}</small>
                     }
                     }
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label fw-bold text-danger">
-                        <i class="bi bi-lock-fill me-2"></i>Mot de passe
+                        <i class="bi bi-lock-fill me-2"></i>{{ 'LOGIN.PASSWORD_LABEL' | translate }}
                     </label>
                     <div class="input-group">
                         <span class="input-group-text bg-white"><i class="bi bi-key-fill text-danger"></i></span>
                         <input formControlName="password" type="password" id="password" name="password"
-                            class="form-control" placeholder="Entrez votre mot de passe" required>
+                            class="form-control" [placeholder]="'LOGIN.PASSWORD_PLACEHOLDER' | translate" required>
                     </div>
                     @if(form.get("password")?.touched && form.get("password")?.invalid) {
                     @if(form.get('password')?.hasError('pattern')) {
                     <small class="text-danger fst-italic">
-                        Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et
-                        un caractère spécial.
+                        {{ 'LOGIN.PASSWORD_ERROR' | translate }}
                     </small>
                     }
                     }
@@ -51,9 +50,9 @@
                     <button [disabled]="!form.valid || loading" class="btn btn-danger text-white fw-bold px-4">
                         <i class="bi bi-box-arrow-in-right me-2"></i>
                         @if (!loading) {
-                        Connexion
+                        {{ 'LOGIN.BUTTON' | translate }}
                         } @else {
-                        <span class="spinner-border spinner-border-sm me-2"></span> Chargement...
+                        <span class="spinner-border spinner-border-sm me-2"></span> {{ 'LOGIN.LOADING' | translate }}
                         }
                     </button>
                 </div>
@@ -63,16 +62,16 @@
 
     <!-- Section Call-To-Action -->
     <section class="text-center mt-5">
-        <p class="text-muted">Pas encore inscrit ?</p>
+        <p class="text-muted">{{ 'LOGIN.NOT_REGISTERED' | translate }}</p>
         <a routerLink="/register" routerLinkActive="active" class="btn btn-outline-danger fw-bold">
-            <i class="bi bi-person-plus-fill me-2"></i>Créer un compte
+            <i class="bi bi-person-plus-fill me-2"></i>{{ 'LOGIN.CREATE_ACCOUNT' | translate }}
         </a>
     </section>
 
     <!-- Section Mot de passe oublié -->
     <section class="text-center mt-3">
         <a [routerLink]="['/forgot-password']" routerLinkActive="active" class="text-danger fw-bold">
-            <i class="bi bi-question-circle-fill me-2"></i>Mot de passe oublié ?
+            <i class="bi bi-question-circle-fill me-2"></i>{{ 'LOGIN.FORGOT_PASSWORD' | translate }}
         </a>
     </section>
 </main>

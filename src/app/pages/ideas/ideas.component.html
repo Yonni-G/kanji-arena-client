@@ -6,32 +6,28 @@
                 <div class="card-body">
                     <h2 class="text-danger mb-4 d-flex align-items-center">
                         <i class="bi bi-lightbulb-fill display-6 me-2"></i>
-                        Idées de prochains jeux
+                        {{ 'IDEAS.NEXT_GAMES_TITLE' | translate }}
                     </h2>
 
                     <div class="mb-4">
                         <h4 class="fw-bold">
-                            <span class="fst-italic"><i class="bi bi-shuffle text-primary me-1"></i>Un jeu </span>
-                            <span class="text-primary">Mix</span>
+                            <span class="fst-italic"><i class="bi bi-shuffle text-primary me-1"></i>{{
+                                'IDEAS.MIX_GAME_LABEL' | translate }}</span>
+                            <span class="text-primary"> {{ 'IDEAS.MIX_GAME' | translate }}</span>
                         </h4>
                         <p class="text-muted">
-                            Ce jeu combine les modes <strong>Classic</strong> et <strong>Reverse</strong>.
-                            Le but est de deviner aléatoirement un kanji depuis un sens proposé ou bien de deviner le
-                            sens d’un kanji affiché.
+                            {{ 'IDEAS.MIX_GAME_DESC' | translate }}
                         </p>
                     </div>
 
                     <div>
                         <h4 class="fw-bold">
-                            <span class="fst-italic"><i class="bi bi-lightning-fill text-warning me-1"></i>Un jeu
-                            </span>
-                            <span class="text-primary">Max</span>
+                            <span class="fst-italic"><i class="bi bi-lightning-fill text-warning me-1"></i>{{
+                                'IDEAS.MAX_GAME_LABEL' | translate }}</span> 
+                            <span class="text-primary"> {{ 'IDEAS.MAX_GAME' | translate }}</span>
                         </h4>
                         <p class="text-muted">
-                            Dans ce mode, chaque erreur sera fatale ! Vous devrez deviner le sens d’un kanji en moins de
-                            5 secondes.
-                            L’objectif est d’enchaîner le plus de bonnes réponses possibles pour réaliser la plus longue
-                            série sans faute.
+                            {{ 'IDEAS.MAX_GAME_DESC' | translate }}
                         </p>
                     </div>
                 </div>
@@ -44,33 +40,28 @@
                 <div class="card-body">
                     <h2 class="text-danger mb-4 d-flex align-items-center">
                         <i class="bi bi-gear-fill display-6 me-2"></i>
-                        Idées d'améliorations
+                        {{ 'IDEAS.IMPROVEMENTS_TITLE' | translate }}
                     </h2>
 
                     <div class="mb-4">
                         <h4 class="fw-bold">
-                            <span class="fst-italic"><i class="bi bi-person-lines-fill text-success me-1"></i>Profil
-                            </span>
-                            Public
+                            <span class="fst-italic"><i class="bi bi-person-lines-fill text-success me-1"></i>{{
+                                'IDEAS.PUBLIC_PROFILE_LABEL' | translate }}</span>
+                            {{ 'IDEAS.PUBLIC_PROFILE' | translate }}
                         </h4>
                         <p class="text-muted">
-                            Créez un profil public permettant à tous les joueurs de consulter les scores et les chronos
-                            de chaque membre.
-                            Une belle façon de stimuler la compétition et de voir qui domine le classement !
+                            {{ 'IDEAS.PUBLIC_PROFILE_DESC' | translate }}
                         </p>
                     </div>
 
                     <div>
                         <h4 class="fw-bold">
-                            <span class="fst-italic"><i class="bi bi-calendar2-week-fill text-info me-1"></i>Défis
-                            </span>
-                            Hebdomadaires
+                            <span class="fst-italic"><i class="bi bi-calendar2-week-fill text-info me-1"></i>{{
+                                'IDEAS.WEEKLY_CHALLENGES_LABEL' | translate }}</span>
+                            {{ 'IDEAS.WEEKLY_CHALLENGES' | translate }}
                         </h4>
                         <p class="text-muted">
-                            Ajouter des défis hebdomadaires où les joueurs peuvent participer à des compétitions
-                            spéciales pour obtenir des récompenses exclusives, comme des badges ou des points bonus.
-                            Ces défis pourraient inclure des objectifs spécifiques, comme répondre correctement à un
-                            certain nombre de kanjis en un temps limité.
+                            {{ 'IDEAS.WEEKLY_CHALLENGES_DESC' | translate }}
                         </p>
                     </div>
                 </div>
