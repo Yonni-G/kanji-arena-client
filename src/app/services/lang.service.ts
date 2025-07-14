@@ -41,8 +41,4 @@ export class LangService {
   getLang(): 'fr' | 'en' | 'ja' {
     return this.lang;
   }
-
-  getApiLang(): 'fr' | 'en' {
-    return this.lang === 'ja' ? 'en' : this.lang;
-  }
 }

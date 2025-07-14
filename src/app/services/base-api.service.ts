@@ -7,7 +7,6 @@ export abstract class BaseApiService {
   constructor(protected readonly langService: LangService) {}
 
   protected get apiUrl(): string {
-    // Utilise la langue d’API (jamais "ja" tant que le backend ne le gère pas)
-    return `${environment.apiUrl}/api/${this.langService.getApiLang()}`;
+    return `${environment.apiUrl}/api/${this.langService.getLang()}`;
   }
 }
