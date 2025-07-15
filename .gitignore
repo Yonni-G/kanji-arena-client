@@ -2,6 +2,7 @@
 
 # YG : data
 /data
+/.vscode
 
 # Compiled output
 /dist
