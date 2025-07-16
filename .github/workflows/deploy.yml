@@ -1,4 +1,4 @@
-name: Deploy Angular on OVH FTP
+name: Deploy Angular on OVH FTP.
 
 on:
   push:
@@ -11,30 +11,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: 🚚 Checkout code
+        uses: actions/checkout@v4
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: 🟦 Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: 📦 Install dependencies
+        run: npm ci
 
-    - name: Build Angular app
-      run: |
-        if [ "${GITHUB_REF##*/}" = "main" ]; then
-          npm run build -- --configuration production
-        else
-          npm run build -- --configuration development
-        fi
+      - name: 🛠️ Build Angular app
+        run: |
+          if [ "${GITHUB_REF##*/}" = "main" ]; then
+            npm run build -- --configuration production
+          else
+            npm run build -- --configuration development
+          fi
 
-    - name: Upload to OVH FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASS }}
-        local-dir: ./dist/browser/
-        server-dir: ${{ github.ref == 'refs/heads/main' && '/www/' || '/dev/' }}
+      - name: 📂 List build output
+        run: ls -la ./dist/client/browser
+
+      - name: 📤 Deploy to OVH FTP (main)
+        if: github.ref == 'refs/heads/main'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/client/browser/
+          server-dir: /www/
+          exclude: |
+            **/.git*
+            **/.DS_Store
+          dangerous-clean-slate: false
+          dry-run: false
+
+      - name: 📤 Deploy to OVH FTP (develop)
+        if: github.ref == 'refs/heads/develop'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/client/browser/
+          server-dir: /dev/
+          exclude: |
+            **/.git*
+            **/.DS_Store
+          dangerous-clean-slate: false
+          dry-run: false
