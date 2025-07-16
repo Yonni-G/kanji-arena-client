@@ -41,3 +41,5 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         local-dir: ./dist/client/
         server-dir: ${{ github.ref == 'refs/heads/main' && '/www/' || '/dev/' }}
+        dangerous-clean-slate: false
+
