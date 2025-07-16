@@ -30,6 +30,9 @@ jobs:
           npm run build -- --configuration development
         fi
 
+    - name: 🤖 Affiche le contenu de dist/client
+      run: ls -la ./dist/client
+
     - name: Upload to OVH FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
