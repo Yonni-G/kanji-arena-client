@@ -1,4 +1,4 @@
-name: Deploy Angular on OVH FTP
+name: Deploy Angular on OVH FTP.
 
 on:
   push:
