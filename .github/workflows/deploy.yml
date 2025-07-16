@@ -33,12 +33,32 @@ jobs:
       - name: 📂 List build output
         run: ls -la ./dist/client/browser
 
-      - name: 📤 Deploy to OVH FTP
+      - name: 📤 Deploy to OVH FTP (main)
+        if: github.ref == 'refs/heads/main'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/client/browser/
-          server-dir: ${{ github.ref == 'refs/heads/main' && '/www/' || '/dev/' }}
+          server-dir: /www/
+          exclude: |
+            **/.git*
+            **/.DS_Store
           dangerous-clean-slate: false
+          dry-run: false
+
+      - name: 📤 Deploy to OVH FTP (develop)
+        if: github.ref == 'refs/heads/develop'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/client/browser/
+          server-dir: /dev/
+          exclude: |
+            **/.git*
+            **/.DS_Store
+          dangerous-clean-slate: false
+          dry-run: false
