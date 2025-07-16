@@ -79,7 +79,7 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ],
-              "outputHashing": "none"
+              "outputHashing": "media"
             }
           },
           "defaultConfiguration": "production"
