@@ -1,12 +1,12 @@
 <!-- Body -->
-<div class="card-body text-center">
+<div class="card-body text-center text-uppercase">
     <!-- SENS AFFICHÉ EN GROS, MAJUSCULE -->
-    <div class="fw-bold text-uppercase text-dark" style="font-size: 2rem;">
+    <div class="fw-bold text-dark" style="font-size: 2rem;">
         {{ card?.proposal || ('REVERSE.PLAY' | translate) }}
     </div>
     @if(card?.more?.length) {
-    <div class="fw-light fst-italic text-muted" style="font-size: 1.2rem;">
-        ({{ card?.more?.join(', ') }})
+    <div class="fw-light fst-italic text-muted" style="font-size: 0.8rem;">
+        {{ card?.more?.join(', ') }}
     </div>
     }
 </div>

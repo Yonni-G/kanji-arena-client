@@ -105,6 +105,7 @@ export class GameService {
               // on collecte les erreurs
               this._listErrors.push({
                 proposal: card?.proposal,
+                more: card?.more || card?.choices[response.correctIndex]?.more,
                 correct: card?.choices[response.correctIndex].label,
                 unCorrect: card?.choices[choiceIndex].label,
               });
