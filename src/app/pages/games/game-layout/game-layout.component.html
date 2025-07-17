@@ -86,7 +86,7 @@
 <app-list-errors [gameMode]="gameMode"></app-list-errors>
 
 <app-modal [title]="'🎉 ' + ('GAME.FINISHED_TITLE' | translate)" [isOpen]="showModal" (close)="closeModal()">
-    @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
+    @if (userLiveChrono && userLiveChrono.chronoValue != null && userLiveChrono.ranking != null) {
     <div class="text-center px-3">
         <div class="my-3">
             <p class="text-muted mb-0">

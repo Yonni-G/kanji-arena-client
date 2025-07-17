@@ -1,5 +1,6 @@
 export type CardError = {
   proposal: string;
-  correct: string,
-  unCorrect: string
-}
+  more?: string[]; // Ajout du champ "more" pour les significations supplémentaires
+  correct: string;
+  unCorrect: string;
+};

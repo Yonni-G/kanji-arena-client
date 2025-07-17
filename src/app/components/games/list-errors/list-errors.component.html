@@ -32,6 +32,14 @@
             </div>
             <div class="text-success fw-bold">
               {{ err.correct }}
+              @if(err.more?.length) {
+              <div class="p-0 m-0">
+                <span class="fw-light small fst-italic text-muted"
+                  style="font-size: 0.8rem; display:block; margin:0; padding:0;">
+                  {{ err.more?.join(', ') }}
+                </span>
+              </div>
+              }
             </div>
           </div>
         </div>
@@ -43,16 +51,27 @@
           <!-- Sens -->
           <div class="fw-bold text-uppercase mb-3" style="font-size: 2rem;">
             {{ err.proposal }}
+            @if(err.more?.length) {
+            <div class="p-0 m-0">
+              <span class="fw-light small fst-italic text-muted"
+                style="font-size: 0.8rem; display:block; margin:0; padding:0;">
+                {{ err.more?.join(', ') }}
+              </span>
+            </div>
+            }
           </div>
 
-          <!-- Kanji incorrect -->
-          <div class="text-danger fw-bold mb-2" style="font-size: 3.5rem; line-height: 1;">
-            {{ err.unCorrect }}
-          </div>
+          <div class="fw-bold" style="font-size: 3.5rem; line-height: 1;">
+            <!-- Kanji incorrect -->
+            <span class="text-danger">
+              {{ err.unCorrect }}
+            </span>
 
-          <!-- Kanji correct -->
-          <div class="text-success fw-bold" style="font-size: 3.5rem; line-height: 1;">
-            {{ err.correct }}
+            <!-- Kanji correct -->
+            <span class="text-success">
+              {{ err.correct }}
+            </span>
+
           </div>
         </div>
         }

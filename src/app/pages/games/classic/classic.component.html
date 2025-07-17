@@ -17,7 +17,7 @@
             {{ choice.label | uppercase }}
             @if(choice.more && choice.more.length > 0) {
             <span class="text-muted small fst-italic" style="font-size: 0.8rem;">
-                ({{ choice.more.join(', ') }})
+                {{ choice.more.join(', ') | uppercase}}
             </span>
             }
         </button>
