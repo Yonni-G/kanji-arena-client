@@ -54,7 +54,7 @@ export class RegisterComponent {
   form = new FormGroup(
     {
       username: new FormControl('', [
-        Validators.pattern('^[a-zA-Z0-9]{3,12}$'), // 3 à 12 caractères alphanumériques
+        Validators.pattern('^[a-zA-Z0-9]{3,12}$'), // 3 à 12 aphanumeriques
       ]),
       nationality: this.nationalityControl,
       email: new FormControl('', [
