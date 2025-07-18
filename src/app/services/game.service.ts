@@ -1,4 +1,3 @@
-// game.service.ts
 import { inject, Injectable, Injector } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ApiGameService } from './api.game.service';
@@ -14,7 +13,7 @@ import { CardError } from '../models/CardError';
 export class GameService {
   private readonly apiGameService: ApiGameService = inject(ApiGameService);
 
-  /* TODO : voir pour faire mieux pour gérer la dependance circulaire */
+  /* TODO : voir pour faire mieux pour gérer la dépendance circulaire */
   private readonly injector = inject(Injector); // ✅ bonne syntaxe ici
   private _chronoService!: ChronoService;
   private get chronoService(): ChronoService {
@@ -24,7 +23,7 @@ export class GameService {
     return this._chronoService;
   }
 
-  // Subject pour l'état du chronometre
+  // Subject pour l'état du chronomètre
   private readonly startSubject = new Subject<void>();
   private readonly stopSubject = new Subject<void>();
   private readonly resetSubject = new Subject<void>();
@@ -33,6 +32,9 @@ export class GameService {
   refreshRanking$ = new Subject<void>();
   // Subject pour l'affichage de la modale
   openModale$ = new Subject<void>();
+
+  // Subject pour notifier une nouvelle carte (pour gestion scroll côté composant)
+  public newCard$ = new Subject<void>(); // <--
 
   private _counters = {
     success: 0,
@@ -72,24 +74,22 @@ export class GameService {
         .checkAnswer(this._gameMode, this._gameToken!, choiceIndex)
         .subscribe({
           next: (response) => {
-            
             this._counters.total++;
-            
+
             // FIN DE PARTIE ?
             if (response.chronoValue) {
-
               this._userLiveChrono = response;
-              // TODO : voir pour ne pas rafraichir le classement systematiquement
+              // TODO : voir pour ne pas rafraîchir le classement systématiquement
               this.refreshRanking$.next();
 
-              // on arrete le chrono
+              // on arrête le chrono
               this.stopSubject.next();
               this.loadingCheckState = 'disabled';
               // on affiche les erreurs
               this.listErrors = this._listErrors;
               // ON AFFICHE la modale
               this.openModale$.next();
-              
+
               return;
             }
 
@@ -111,14 +111,17 @@ export class GameService {
               });
               //console.log(this._listErrors);
             }
-            
+
             this.loadingCheckState = 'masquer les boutons';
             // Étape 2 : laisser apparaître la couleur de feedback
             setTimeout(() => {
               this.isLoading = false;
               this._card = response.card; // nouvelle carte
+              this.newCard$.next(); // <-- NOTIFIE le composant qu'une nouvelle carte est affichée
               this._feedbackClass = ''; // reset couleur
               this.loadingCheckState = 'disabled';
+              // Le SCROLL se fait désormais côté composant Angular,
+              // en s'abonnant à newCard$ et en scrolant avec @ViewChild('popo')
             }, 400); // délai feedback visible (ajustable)
           },
           error: (err) => {
@@ -126,8 +129,6 @@ export class GameService {
             this.isLoading = false;
           },
         });
-
-      
     }, 200); // petite latence avant la requête (pour bien voir le spinner si besoin)
   }
 
@@ -135,7 +136,7 @@ export class GameService {
   resetPostGameDatas() {
     // on masque le dernier chrono
     this._userLiveChrono = null;
-    // on reinit les tableaux d'erreurs
+    // on réinit les tableaux d'erreurs
     this._listErrors = [];
     this.listErrors = [];
   }
@@ -151,10 +152,11 @@ export class GameService {
 
     // on démarre le jeu et en retour on obtient une carte
     this.isLoading = true;
-    
+
     this.startGame(this._gameMode, () => {
       this.isLoading = false;
       this.startSubject.next(); // Démarrer le chrono
+      // Le scroll sera déclenché côté composant grâce à newCard$
     });
   }
 
@@ -164,22 +166,23 @@ export class GameService {
       next: (response) => {
         this._card = response.card;
         this._gameToken = response.gameToken;
-        //console.log(this._gameToken);
+        this.newCard$.next(); // <-- NOTIFIE le composant qu'une nouvelle carte est affichée
         if (onLoaded) onLoaded();
       },
       error: (err) => {
         console.error('Erreur lors du chargement des cartes classiques:', err);
       },
     });
+    // Plus de scroll ici, c'est désormais le composant qui gère le scroll !
   }
 
   resetGame() {
-    // on arrete le chrono
+    // on arrête le chrono
     this.resetSubject.next();
 
     // on réinitialise les données du jeu
     this._card = null;
-    
+
     this._counters = {
       success: 0,
       errors: 0,

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {
   RouterOutlet,
   ActivatedRoute,
@@ -58,8 +58,31 @@ export class GameLayoutComponent {
     });
   }
 
+  @ViewChild('endChoices') endChoices!: ElementRef<HTMLDivElement>;
+  needScroll = false;
+
+  // Appelle ceci après chaque nouvelle carte
+  triggerScrollToEndChoices() {
+    this.needScroll = true;
+  }
+
+  ngAfterViewChecked() {
+    if (this.needScroll) {
+      this.endChoices?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      this.needScroll = false;
+    }
+  }
+
   ngOnInit(): void {
 
+    this.gameService.newCard$.subscribe(() => {
+      // Une nouvelle carte vient d'arriver : prévoir un scroll
+      this.needScroll = true;
+    });
+    
     // 1. Au chargement initial (F5)
     this.setTitleFromRoute(this.route);
 
