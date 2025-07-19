@@ -6,6 +6,7 @@ import { ChronoService } from './chrono.service';
 import { GameMode } from '../models/GameMode';
 import { UserChrono } from '../models/userChrono';
 import { CardError } from '../models/CardError';
+import { JlptStorageService } from './jlptStorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class GameService {
     return this._chronoService;
   }
 
+  private readonly jlptStorageService: JlptStorageService = inject(JlptStorageService);
   // Subject pour l'état du chronomètre
   private readonly startSubject = new Subject<void>();
   private readonly stopSubject = new Subject<void>();
@@ -162,7 +164,7 @@ export class GameService {
 
   // chargement de cartes avec callback loading optionnel
   startGame(gameMode: GameMode, onLoaded?: () => void) {
-    this.apiGameService.startGame(gameMode).subscribe({
+    this.apiGameService.startGame(gameMode, this.jlptStorageService.jlptGrade).subscribe({
       next: (response) => {
         this._card = response.card;
         this._gameToken = response.gameToken;

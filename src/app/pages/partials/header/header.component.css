@@ -127,6 +127,13 @@
     box-shadow: 0 2px 0 #7c1b24;
 }
 
+.kanji-button.active {
+    background: linear-gradient(to bottom, #dc3545 0%, #a71d2a 100%);
+    color: #fff !important;
+    box-shadow: 0 2px 0 #7c1b24;
+    transform: translateY(2px);
+}
+
 /* Style spécial pour les deux liens finaux */
 .navbar-nav.ms-auto .btn-outline-final {
     border: 2px solid #EEE3D2;

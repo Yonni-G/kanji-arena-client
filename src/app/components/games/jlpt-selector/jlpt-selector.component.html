@@ -1,0 +1,11 @@
+<label class="form-label mb-2"></label>
+<div class="btn-group w-100 my-2" role="group" aria-label="Sélecteur JLPT">
+    @for (n of niveaux; track n) {
+    <input type="radio" class="btn-check" name="jlpt" [id]="'jlpt-radio-' + n" [value]="n" [checked]="value === n"
+        (change)="select.emit(n)" autocomplete="off" />
+    <label class="btn btn-outline-danger d-flex flex-column align-items-center position-relative"
+        [for]="'jlpt-radio-' + n" style="min-width: 70px;">
+        <div>N{{ n }}</div>
+    </label>
+    }
+</div>
