@@ -1,14 +1,23 @@
-import { Injectable } from '@angular/core';
-import { JlptGrade } from '../models/JlptGrade';
+import { Injectable } from "@angular/core";
+import { JlptGrade } from "../models/JlptGrade";
 
 const JLPT_GRADE_LS_NAME = 'jlptGrade';
 
 @Injectable({ providedIn: 'root' })
 export class JlptStorageService {
   // Lecture depuis le localStorage
-  get jlptGrade(): number | null {
+  get jlptGrade(): JlptGrade | null {
     const value = localStorage.getItem(JLPT_GRADE_LS_NAME);
-    return value ? Number(value) : null;
+    if (
+      value === '5' ||
+      value === '4' ||
+      value === '3' ||
+      value === '2' ||
+      value === '1'
+    ) {
+      return Number(value) as JlptGrade;
+    }
+    return null;
   }
 
   // Ecriture dans le localStorage

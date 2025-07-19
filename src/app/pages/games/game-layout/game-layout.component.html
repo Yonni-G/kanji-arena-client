@@ -22,9 +22,7 @@
     </section>
     }
 
-    <app-ranking [gameMode]="gameMode!"></app-ranking>
-
-    <app-jlpt-selector [value]="currentJlpt" (select)="onChangeJlpt($event)"></app-jlpt-selector>
+    <app-ranking [gameMode]="gameMode!" [jlptGrade]="currentJlpt!"></app-ranking>    
 
     <section>
         @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
@@ -42,20 +40,35 @@
         }
     </section>
 
+    <app-jlpt-selector [value]="currentJlpt" (select)="onChangeJlpt($event)"></app-jlpt-selector>
+
     <!-- PARTIE HAUTE D'UN JEU -->
     <div id="quiz-card" class="card game-width" [ngClass]="feedbackClass()"
         style="border: 1px solid #ccc; border-radius: 10px;">
         <!-- Header -->
         <div class="card-header text-center p-2">
             <!-- Counters -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <!-- Success Counter -->
+            <div class="d-flex justify-content-between align-items-center mb-2 position-relative" style="min-height: 100px;">
+                <!-- Compteur gauche -->
                 <div class="d-flex justify-content-center align-items-center rounded-circle bg-success text-white fw-bold fs-4"
                     style="width: 80px; height: 80px;">
                     {{ counters.success }}/10
                 </div>
-                <!-- Other Counters -->
-                <div class="d-flex flex-column text-end ms-auto">
+            
+                <!-- JLPT cercle CENTRÉ, position absolute -->
+                <div>
+                    <div class="rounded-circle d-flex flex-column justify-content-center align-items-center" id="jlptGrade">
+                        <span class="fw-bold" style="font-size: 2rem; color: #dc3545; line-height: 1;">
+                            N{{ currentJlpt }}
+                        </span>
+                        <span style="font-size: 0.73rem; color: #b02a37;">
+                            {{ KANJI_COUNT[currentJlpt] }} Kanji
+                        </span>
+                    </div>
+                </div>
+            
+                <!-- Compteurs droite -->
+                <div class="d-flex flex-column text-end" style="min-width: 90px;">
                     <span class="badge bg-danger mb-1" style="font-size: 0.9rem;">
                         <i class="bi bi-x-octagon-fill"></i>
                         {{ 'GAME.ERRORS' | translate }} {{ counters.errors }}
@@ -66,6 +79,8 @@
                     </span>
                 </div>
             </div>
+
+
             <hr style="border-top: 1px solid #ccc; margin: 0.3rem 0;">
             <div class="mt-2 mb-2">
                 <app-chronometer></app-chronometer>

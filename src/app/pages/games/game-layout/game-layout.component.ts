@@ -22,7 +22,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
 import { JlptSelectorComponent } from '../../../components/games/jlpt-selector/jlpt-selector.component';
 import { JlptGrade } from '../../../models/JlptGrade';
-import { JlptStorageService } from '../../../services/jlptGrade.service';
+import { JlptStorageService } from '../../../services/jlptStorage.service';
 
 @Component({
   selector: 'app-game-layout',
@@ -64,6 +64,13 @@ export class GameLayoutComponent {
   }
 
   currentJlpt: JlptGrade = JlptGrade.N1;
+  KANJI_COUNT: Record<number, number> = {
+    5: 80,
+    4: 250,
+    3: 620,
+    2: 1000,
+    1: 2134,
+  };
   private static readonly JLPT_GRADE_LS_NAME = 'jlptGrade';
 
   ngOnInit(): void {
@@ -95,7 +102,11 @@ export class GameLayoutComponent {
   onChangeJlpt(selected: JlptGrade) {
     this.currentJlpt = selected;
     this.jlptStorage.jlptGrade = selected;
-    // ici tu peux aussi déclencher d'autres comportements (API, navigation, etc)
+    // on demande un reload du ranking
+    this.gameService.refreshRanking$.next();
+    console.log('ici')
+    this.gameService.resetGame();
+    this.gameService.resetPostGameDatas();
   }
 
   // on scroll auto pour s'assurer que les choices sont toujours visibles

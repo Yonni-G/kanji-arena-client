@@ -5,12 +5,6 @@
         (change)="select.emit(n)" autocomplete="off" />
     <label class="btn btn-outline-danger d-flex flex-column align-items-center position-relative"
         [for]="'jlpt-radio-' + n" style="min-width: 70px;">
-        @if (value === n) {
-        <small class="position-absolute translate-middle-x start-50"
-            style="top:-1.3em; font-size: .85em; color: #b02a37;">
-            {{ KANJI_COUNT[n] }}
-        </small>
-        }
         <div>N{{ n }}</div>
     </label>
     }

@@ -3,13 +3,24 @@
     style="max-width: 420px;">
     <div class="d-flex flex-column align-items-center gap-3">
         <!-- Ligne 1 : Meilleur chrono -->
-        <div class="d-flex align-items-center gap-2 justify-content-center">
-            <i class="bi bi-stopwatch text-danger fs-3"></i>
-            <span class="fw-semibold">
-                {{ 'RANKING.BEST_CHRONO' | translate }}
-                <span class="text-danger fs-5">{{ userBestChrono.chronoValue / 1000 | chronoFormat }}</span>
-            </span>
+        <div class="d-flex flex-column align-items-center text-center">
+            <div>
+                <i class="bi bi-stopwatch text-danger fs-4 align-middle"></i>
+                <span class="fw-semibold align-middle" style="font-size:1rem;">
+                    {{ 'RANKING.BEST_CHRONO' | translate }}
+                </span>
+                <span class="badge rounded-pill bg-white border border-danger text-danger ms-2 align-middle"
+                    style="font-size:1rem;">
+                    JLPT N{{ userBestChrono.jlptGrade }}
+                </span>
+            </div>
+            <div>
+                <span class="fw-bold fs-4 text-danger align-middle">
+                    {{ userBestChrono.chronoValue / 1000 | chronoFormat }}
+                </span>
+            </div>
         </div>
+
         <!-- Ligne 2 : Rang -->
         <div class="d-flex align-items-center gap-2 justify-content-center">
             <span class="fw-semibold">
@@ -54,7 +65,7 @@
             aria-controls="classementTable">
             <span>
                 <i class="bi bi-trophy-fill text-warning me-2"></i>
-                {{ 'RANKING.GENERAL_TITLE' | translate }}
+                {{ 'RANKING.GENERAL_TITLE' | translate }} JLPT N{{jlptGrade}}
                 <small> • {{ metrics.nbLimitRanking }} {{ 'RANKING.TOP' | translate }}</small>
             </span>
             <i class="bi bi-chevron-down"></i>

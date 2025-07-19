@@ -5,20 +5,21 @@ import { Observable } from 'rxjs';
 import { GameMode } from '../models/GameMode';
 import { BaseApiService } from './base-api.service';
 import { LangService } from './lang.service';
+import { JlptGrade } from '../models/JlptGrade';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiGameService extends BaseApiService {
-    private readonly http: HttpClient;
-    constructor(http: HttpClient, langService: LangService) {
-      super(langService);
-      this.http = http;
-    }
+  private readonly http: HttpClient;
+  constructor(http: HttpClient, langService: LangService) {
+    super(langService);
+    this.http = http;
+  }
 
-  startGame(gameMode: GameMode): Observable<any> {
+  startGame(gameMode: GameMode, jlptGrade: JlptGrade | null): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}/games/${gameMode}/start`,
+      `${this.apiUrl}/games/${gameMode}/${jlptGrade}/start`,
       { withCredentials: true } // 👈 ajoute les cookies
     );
   }
@@ -26,7 +27,7 @@ export class ApiGameService extends BaseApiService {
   checkAnswer(
     gameMode: GameMode,
     gameToken: string,
-    choiceIndex: number
+    choiceIndex: number,
   ): Observable<any> {
     return this.http.post<any>(
       `${this.apiUrl}/games/${gameMode}/checkAnswer`,
@@ -35,9 +36,9 @@ export class ApiGameService extends BaseApiService {
     );
   }
 
-  loadRanking(gameMode: GameMode): Observable<any> {
+  loadRanking(gameMode: GameMode, jlptGrade: JlptGrade): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}/games/${gameMode}/ranking`,
+      `${this.apiUrl}/games/${gameMode}/${jlptGrade}/ranking`,
       { withCredentials: true } // 👈 ajoute les cookies
     );
   }

@@ -7,6 +7,8 @@ import { DatePipe, NgClass } from '@angular/common';
 import { GameService } from '../../../services/game.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
+import { JlptStorageService } from '../../../services/jlptStorage.service';
+import { JlptGrade } from '../../../models/JlptGrade';
 
 @Component({
   selector: 'app-ranking',
@@ -15,8 +17,8 @@ import { LangService } from '../../../services/lang.service';
   styleUrl: './ranking.component.css',
 })
 export class RankingComponent {
-
   @Input() gameMode!: GameMode;
+  @Input() jlptGrade!: JlptGrade;
 
   metrics = {
     nbLimitRanking: 0,
@@ -27,6 +29,7 @@ export class RankingComponent {
 
   private readonly apiGameService = inject(ApiGameService);
   private readonly gameService = inject(GameService);
+  private readonly jlptStorageService = inject(JlptStorageService);
 
   ngOnInit() {
     //this.loadRanking();
@@ -36,7 +39,8 @@ export class RankingComponent {
   }
 
   loadRanking() {
-    this.apiGameService.loadRanking(this.gameMode).subscribe({
+    const jlptLevel = this.jlptStorageService.jlptGrade ?? JlptGrade.N5;
+    this.apiGameService.loadRanking(this.gameMode, jlptLevel).subscribe({
       next: (data) => {
         //console.log('Classement chargé', data);
         this.userBestChrono = data.userBestChrono;
