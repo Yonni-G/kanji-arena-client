@@ -65,8 +65,8 @@
             aria-controls="classementTable">
             <span>
                 <i class="bi bi-trophy-fill text-warning me-2"></i>
-                {{ 'RANKING.GENERAL_TITLE' | translate }} JLPT N{{jlptGrade}}
-                <small> • {{ metrics.nbLimitRanking }} {{ 'RANKING.TOP' | translate }}</small>
+                {{ 'RANKING.GENERAL_TITLE' | translate }}<strong> JLPT N{{jlptGrade}}</strong>
+                <small> • {{ 'RANKING.TOP' | translate }} {{ metrics.nbLimitRanking }}</small>
             </span>
             <i class="bi bi-chevron-down"></i>
         </button>
