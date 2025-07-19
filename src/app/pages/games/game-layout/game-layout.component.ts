@@ -15,11 +15,14 @@ import { ChronoFormatPipe } from '../../../pipes/chrono-format.pipe';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { ChronometerComponent } from '../../../components/games/chronometer/chronometer.component';
 import { Card } from '../../../models/Card';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { ChronoService } from '../../../services/chrono.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
+import { JlptSelectorComponent } from '../../../components/games/jlpt-selector/jlpt-selector.component';
+import { JlptGrade } from '../../../models/JlptGrade';
+import { JlptStorageService } from '../../../services/jlptGrade.service';
 
 @Component({
   selector: 'app-game-layout',
@@ -32,6 +35,7 @@ import { LangService } from '../../../services/lang.service';
     ChronometerComponent,
     NgClass,
     TranslateModule,
+    JlptSelectorComponent,
   ],
   templateUrl: './game-layout.component.html',
   styleUrl: './game-layout.component.css',
@@ -48,7 +52,8 @@ export class GameLayoutComponent {
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly chronoService: ChronoService
+    private readonly chronoService: ChronoService,
+    private jlptStorage: JlptStorageService
   ) {
     this.gameService.openModale$.subscribe(() => {
       this.openModal();
@@ -58,6 +63,42 @@ export class GameLayoutComponent {
     });
   }
 
+  currentJlpt: JlptGrade = JlptGrade.N1;
+  private static readonly JLPT_GRADE_LS_NAME = 'jlptGrade';
+
+  ngOnInit(): void {
+    // Récupère le niveau sauvegardé au chargement (si disponible)
+    const stored = this.jlptStorage.jlptGrade;
+    if (stored) {
+      this.currentJlpt = stored;
+    } else {
+      this.jlptStorage.jlptGrade = this.currentJlpt;
+    }
+
+    this.gameService.newCard$.subscribe(() => {
+      // Une nouvelle carte vient d'arriver : prévoir un scroll
+      this.needScroll = true;
+    });
+
+    // 1. Au chargement initial (F5)
+    this.setTitleFromRoute(this.route);
+
+    // 2. Lors des navigations internes
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.setTitleFromRoute(this.route);
+      });
+    this.gameService.resetGame();
+  }
+
+  onChangeJlpt(selected: JlptGrade) {
+    this.currentJlpt = selected;
+    this.jlptStorage.jlptGrade = selected;
+    // ici tu peux aussi déclencher d'autres comportements (API, navigation, etc)
+  }
+
+  // on scroll auto pour s'assurer que les choices sont toujours visibles
   @ViewChild('endChoices') endChoices!: ElementRef<HTMLDivElement>;
   needScroll = false;
 
@@ -74,25 +115,6 @@ export class GameLayoutComponent {
       });
       this.needScroll = false;
     }
-  }
-
-  ngOnInit(): void {
-
-    this.gameService.newCard$.subscribe(() => {
-      // Une nouvelle carte vient d'arriver : prévoir un scroll
-      this.needScroll = true;
-    });
-    
-    // 1. Au chargement initial (F5)
-    this.setTitleFromRoute(this.route);
-
-    // 2. Lors des navigations internes
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.setTitleFromRoute(this.route);
-      });
-    this.gameService.resetGame();
   }
 
   private setTitleFromRoute(route: ActivatedRoute) {

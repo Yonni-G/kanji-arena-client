@@ -24,6 +24,8 @@
 
     <app-ranking [gameMode]="gameMode!"></app-ranking>
 
+    <app-jlpt-selector [value]="currentJlpt" (select)="onChangeJlpt($event)"></app-jlpt-selector>
+
     <section>
         @if (userLiveChrono && userLiveChrono!.chronoValue && userLiveChrono!.ranking) {
         <div class="alert alert-success d-inline-flex align-items-center gap-2 px-4 py-2 mt-3 rounded-pill">
