@@ -58,7 +58,7 @@
                             [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate" required>
                     </div>
                     @if(form.get("email")?.touched && form.get("email")?.invalid) {
-                    @if(form.get('email')?.hasError('pattern')) {
+                    @if(form.get('email')?.hasError('invalidEmail')) {
                     <small class="text-danger fst-italic">{{ 'REGISTER.EMAIL_ERROR' | translate }}</small>
                     }
                     }
@@ -73,7 +73,7 @@
                             class="form-control" [placeholder]="'REGISTER.PASSWORD_PLACEHOLDER' | translate" required>
                     </div>
                     @if(form.get("password")?.touched && form.get("password")?.invalid) {
-                    @if(form.get('password')?.hasError('pattern')) {
+                    @if(form.get('password')?.hasError('weakPassword')) {
                     <small class="text-danger fst-italic">{{ 'REGISTER.PASSWORD_ERROR' | translate }}</small>
                     }
                     }

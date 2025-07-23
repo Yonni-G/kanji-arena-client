@@ -11,16 +11,16 @@ import { MessageComponent } from './pages/partials/message/message.component';
 import { AuthService } from './services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MessageService } from './services/message.service';
-import { Title } from '@angular/platform-browser';
-import { filter } from 'rxjs';
+import { filter, forkJoin } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LangService } from './services/lang.service';
+import { SeoService } from './services/SeoService';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'], // corrigé pour `styleUrls`
 })
 export class AppComponent {
   private readonly router = inject(Router);
@@ -29,29 +29,82 @@ export class AppComponent {
   private readonly messageService = inject(MessageService);
 
   constructor(
-    private readonly titleService: Title,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly langService: LangService,
-    private readonly translate: TranslateService // Ajout pour la traduction dynamique
+    private activatedRoute: ActivatedRoute,
+    private langService: LangService,
+    private translate: TranslateService,
+    private seoService: SeoService
   ) {
-    // on charge les traductions
     const lang = this.langService.getLang();
     this.translate.addLangs(['en', 'fr', 'ja']);
     this.translate.use(lang);
 
-    // Met à jour le titre à chaque navigation, en le traduisant dynamiquement
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
         let route = this.activatedRoute;
         while (route.firstChild) route = route.firstChild;
-        const titleKey = route.snapshot.data['title'];
+
+        const data = route.snapshot.data;
+
+        // Récupération des clés i18n pour titre, description, keywords
+        const titleKey: string | undefined = data['title'];
+        const descKey: string | undefined = data['descriptionKey'];
+        const keywordsKey: string | undefined = data['keywordsKey'];
+
+        // Valeur par défaut des metas si absence de clés
+        const defaultTitle = 'Kanji Quiz | Kanji Arena';
+        const defaultDescription =
+          'Kanji-Arena : plateforme de jeux et quiz en ligne pour progresser en japonais et défier la communauté sur les kanji.';
+        const defaultKeywords =
+          'kanji, japonais, quiz, jeu, classement, apprentissage, langue, Japon, kanji-arena';
+        const defaultImage =
+          'https://kanji-arena.com/assets/images/og-image.png'; // image OG
+        const baseUrl = 'https://kanji-arena.com';
+
         if (titleKey) {
-          this.translate.get(titleKey).subscribe((translatedTitle: string) => {
-            this.titleService.setTitle(`${translatedTitle} | Kanji Arena`);
-          });
+          // Traduction parallèle avec forkJoin pour optimiser les appels
+          forkJoin({
+            title: this.translate.get(titleKey),
+            description: descKey
+              ? this.translate.get(descKey)
+              : Promise.resolve(defaultDescription),
+            keywords: keywordsKey
+              ? this.translate.get(keywordsKey)
+              : Promise.resolve(defaultKeywords),
+          }).subscribe(
+            ({ title, description, keywords }) => {
+              const fullTitle = `${title} | Kanji Quiz | Kanji Arena`;
+              const url = baseUrl + this.router.url;
+
+              this.seoService.updateHeadTags(
+                fullTitle,
+                description,
+                keywords,
+                url,
+                defaultImage
+              );
+            },
+            (error) => {
+              console.error('Erreur traduction SEO:', error);
+              // fallback simple
+              this.seoService.updateHeadTags(
+                defaultTitle,
+                defaultDescription,
+                defaultKeywords,
+                baseUrl,
+                defaultImage
+              );
+            }
+          );
         } else {
-          this.titleService.setTitle('Kanji Arena');
+          // Pas de clé titre => fallback
+          this.seoService.updateHeadTags(
+            defaultTitle,
+            defaultDescription,
+            defaultKeywords,
+            baseUrl,
+            defaultImage
+          );
         }
       });
   }
@@ -60,12 +113,12 @@ export class AppComponent {
     const token = this.authService.getAccessTokenFromStorage();
 
     if (token) {
-      // 🔐 Vérifie l’expiration du token
+      // Vérification expiration token
       const isExpired = this.jwtHelper.isTokenExpired(token);
 
       if (isExpired) {
         this.messageService.setMessage({
-          text: 'Votre session a expiré, il est temps de vous reconnecter :)',
+          text: "For security reasons, it's time to reconnect :)",
           type: 'info',
         });
         this.authService.logout();
@@ -73,7 +126,7 @@ export class AppComponent {
         return;
       }
 
-      // ✅ sinon : initialise comme prévu
+      // Initialisation nom utilisateur
       const username = this.authService.getUsernameFromToken();
 
       if (!username) {

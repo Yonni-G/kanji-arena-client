@@ -18,42 +18,74 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
-    data: { title: 'ROUTES.ABOUT' },
+    data: {
+      title: 'ROUTES.ABOUT',
+      descriptionKey: 'ROUTES.META.ABOUT',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'contact',
     component: ContactComponent,
-    data: { title: 'ROUTES.CONTACT' },
+    data: {
+      title: 'ROUTES.CONTACT',
+      descriptionKey: 'ROUTES.META.CONTACT',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: '',
     component: HomeComponent,
-    data: { title: 'ROUTES.HOME' },
+    data: {
+      title: 'ROUTES.HOME',
+      descriptionKey: 'ROUTES.META.HOME',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: { title: 'ROUTES.LOGIN' },
+    data: {
+      title: 'ROUTES.LOGIN',
+      descriptionKey: 'ROUTES.META.LOGIN',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'register',
     component: RegisterComponent,
-    data: { title: 'ROUTES.REGISTER' },
+    data: {
+      title: 'ROUTES.REGISTER',
+      descriptionKey: 'ROUTES.META.REGISTER',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
-    data: { title: 'ROUTES.FORGOT_PASSWORD' },
+    data: {
+      title: 'ROUTES.FORGOT_PASSWORD',
+      descriptionKey: 'ROUTES.META.FORGOT_PASSWORD',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'reset-password/:resettoken',
     component: ResetPasswordComponent,
-    data: { title: 'ROUTES.RESET_PASSWORD' },
+    data: {
+      title: 'ROUTES.RESET_PASSWORD',
+      descriptionKey: 'ROUTES.META.RESET_PASSWORD',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
   {
     path: 'dashboard/profile',
     component: ProfileComponent,
-    data: { title: 'ROUTES.PROFILE' },
+    data: {
+      title: 'ROUTES.PROFILE',
+      descriptionKey: 'ROUTES.META.PROFILE',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
     canActivate: [authGuard],
   },
   {
@@ -68,6 +100,8 @@ export const routes: Routes = [
           gameName: 'ROUTES.CLASSIC_NAME',
           gameMode: GameMode.CLASSIC,
           gameDesc: 'ROUTES.CLASSIC_DESC',
+          descriptionKey: 'ROUTES.META.CLASSIC',
+          keywordsKey: 'ROUTES.META.KEYWORDS_GAMES',
         },
       },
       {
@@ -78,6 +112,8 @@ export const routes: Routes = [
           gameName: 'ROUTES.REVERSE_NAME',
           gameMode: GameMode.REVERSE,
           gameDesc: 'ROUTES.REVERSE_DESC',
+          descriptionKey: 'ROUTES.META.REVERSE',
+          keywordsKey: 'ROUTES.META.KEYWORDS_GAMES',
         },
       },
       { path: '', redirectTo: 'classic', pathMatch: 'full' },
@@ -86,6 +122,10 @@ export const routes: Routes = [
   {
     path: 'ideas',
     component: IdeasComponent,
-    data: { title: 'ROUTES.IDEAS' },
+    data: {
+      title: 'ROUTES.IDEAS',
+      descriptionKey: 'ROUTES.META.IDEAS',
+      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+    },
   },
 ];

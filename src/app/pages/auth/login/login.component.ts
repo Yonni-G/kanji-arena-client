@@ -12,6 +12,8 @@ import { User } from '../../../models/user';
 import { finalize } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
+import { emailValidator } from '../../../validators/emailValidator';
+import { passwordValidator } from '../../../validators/passwordValidator';
 
 
 @Component({
@@ -30,14 +32,12 @@ export class LoginComponent {
   form = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
+      emailValidator(),
     ]),
     password: new FormControl(null, [
       Validators.required,
       // Au moins 8 caractères, au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial
-      Validators.pattern(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>?/~]).{8,}$'
-      ),
+      passwordValidator()
     ]),
   });
 

@@ -18,6 +18,7 @@ import { passwordMatchValidator } from '../../../validators/passwordMatchValidat
 import { finalize } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
+import { passwordValidator } from '../../../validators/passwordValidator';
 
 @Component({
   selector: 'app-reset-password',
@@ -40,9 +41,7 @@ export class ResetPasswordComponent {
       password: new FormControl(null, [
         Validators.required,
         // Au moins 8 caractères, au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial
-        Validators.pattern(
-          '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>?/~]).{8,}$'
-        ),
+        passwordValidator(),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
     },
@@ -104,7 +103,7 @@ export class ResetPasswordComponent {
           error: (error) => {
             console.error('Réinitialisation échouée', error);
             this.messageService.setMessage({
-              text: error.message,
+              text: error.error.message,
               type: 'error',
             });
           },
