@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
-import { ProfileComponent } from './pages/auth/profile/profile.component';
+import { ProfileComponent } from './pages/dashboard/profile/profile.component';
 import { authGuard } from './guards/auth.guard';
 import { ClassicComponent } from './pages/games/classic/classic.component';
 import { GameLayoutComponent } from './pages/games/game-layout/game-layout.component';
@@ -13,6 +13,7 @@ import { IdeasComponent } from './pages/ideas/ideas.component';
 import { GameMode } from './models/GameMode';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
+import { MyLearningSpaceComponent } from './pages/dashboard/my-learning-space/my-learning-space.component';
 
 export const routes: Routes = [
   {
@@ -79,13 +80,27 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'dashboard/profile',
-    component: ProfileComponent,
-    data: {
-      title: 'ROUTES.PROFILE',
-      descriptionKey: 'ROUTES.META.PROFILE',
-      keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
-    },
+    path: 'dashboard',
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: {
+          title: 'ROUTES.PROFILE',
+          descriptionKey: 'ROUTES.META.PROFILE',
+          keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+        },
+      },
+      {
+        path: 'my-learning-space',
+        component: MyLearningSpaceComponent,
+        data: {
+          title: 'ROUTES.MY_LEARNING_SPACE',
+          descriptionKey: 'ROUTES.META.MY_LEARNING_SPACE',
+          keywordsKey: 'ROUTES.META.KEYWORDS_DEFAULT',
+        },
+      },
+    ],
     canActivate: [authGuard],
   },
   {
