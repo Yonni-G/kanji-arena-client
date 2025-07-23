@@ -206,6 +206,21 @@
     "REVERSE": "Reverse game mode",
     "REVERSE_NAME": "Reverse",
     "REVERSE_DESC": "Guess 10 kanji matching the given meaning as quickly as possible!",
-    "IDEAS": "Ideas for upcoming games"
+    "IDEAS": "Ideas for upcoming games",
+    "META": {
+      "ABOUT": "About Kanji-Arena, a platform to learn kanji through quizzes.",
+      "CONTACT": "Contact Kanji-Arena for support or questions.",
+      "HOME": "Kanji Quiz – Online games to improve your Japanese skills.",
+      "LOGIN": "Log in to access your Kanji Quiz account.",
+      "REGISTER": "Create your account to start playing.",
+      "FORGOT_PASSWORD": "Reset your forgotten password.",
+      "RESET_PASSWORD": "Securely reset your password.",
+      "PROFILE": "Manage your profile and track your progress.",
+      "CLASSIC": "Classic mode: quickly guess the meaning of 10 kanji.",
+      "REVERSE": "Reverse mode: quickly match meanings to kanji.",
+      "IDEAS": "Submit your game ideas to improve Kanji-Arena.",
+      "KEYWORDS_DEFAULT": "kanji, quiz, japanese, learning, kanji-arena, game, languages",
+      "KEYWORDS_GAMES": "kanji, kanji quiz, japanese games, classic mode, reverse mode"
+    }
   }
 }

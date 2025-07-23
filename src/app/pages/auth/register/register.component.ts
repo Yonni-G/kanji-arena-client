@@ -15,6 +15,8 @@ import { Country, CountrySelectComponent } from '@wlucha/ng-country-select';
 import { countryObjectValidator } from '../../../validators/countryObjectValidator';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LangService } from '../../../services/lang.service';
+import { passwordValidator } from '../../../validators/passwordValidator';
+import { emailValidator } from '../../../validators/emailValidator';
 
 @Component({
   selector: 'app-register',
@@ -59,14 +61,11 @@ export class RegisterComponent {
       nationality: this.nationalityControl,
       email: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
+        emailValidator()
       ]),
       password: new FormControl('', [
         Validators.required,
-        // Au moins 8 caractères, au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial
-        Validators.pattern(
-          '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>?/~]).{8,}$'
-        ),
+        passwordValidator()
       ]),
       confirmPassword: new FormControl('', [Validators.required]),
     },
