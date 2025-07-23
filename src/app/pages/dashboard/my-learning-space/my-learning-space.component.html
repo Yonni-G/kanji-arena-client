@@ -1,0 +1,88 @@
+<section class="container mt-4 mb-5">
+    <!-- Titre principal -->
+    <div class="mb-5 text-center">
+        <i class="bi bi-mortarboard-fill display-3 text-danger mb-2"></i>
+        <h2 class="fw-bold text-danger display-5">{{ 'MY_LEARNING_SPACE.TITLE' | translate }}</h2>
+    </div>
+
+    <!-- Sous-titres -->
+    <div class="mb-5">
+        <p class="text-muted fs-6 d-flex align-items-center gap-3">
+            <i class="bi bi-info-circle-fill text-primary fs-3"></i>
+            <span>{{ 'MY_LEARNING_SPACE.SUB_TITLE1' | translate }}</span>
+        </p>
+        <p class="text-muted fs-6 d-flex align-items-center gap-3">
+            <i class="bi bi-clock-history text-secondary fs-3"></i>
+            <span>{{ 'MY_LEARNING_SPACE.SUB_TITLE2' | translate }}</span>
+        </p>
+    </div>
+
+    <!-- Liste des cards -->
+    @if (ProgressionData.items.length > 0) {
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (item of ProgressionData.items; track item.kanji) {
+        <div class="col d-flex justify-content-center">
+            <div class="card h-100 border-0 shadow rounded-4 mx-auto w-75">
+
+                <!-- Corps de la card -->
+                <div class="card-body bg-light d-flex flex-column align-items-center py-4 rounded-top">
+
+                    <!-- Kanji -->
+                    <div class="display-3 text-danger mb-3"
+                        style="font-family: 'Noto Sans JP', sans-serif; user-select: none;">
+                        {{ item.kanji }}
+                    </div>
+
+                    <!-- Sens (meanings) -->
+                    <ul class="list-unstyled text-center mb-3 w-100 px-3">
+                        @for (meaning of item.kanjiDetails.meaning; track meaning) {
+                        <li
+                            class="text-muted fs-6 text-uppercase text-start text-justify d-flex align-items-center gap-2">
+                            <i class="bi bi-dot text-danger"></i>
+                            <span>{{ meaning }}</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Footer -->
+                <div
+                    class="card-footer bg-white small text-muted rounded-bottom py-2 d-flex justify-content-center gap-4 flex-wrap align-items-center">
+
+                    <!-- JLPT -->
+                    <span class="d-flex align-items-center gap-2">
+                        <i class="bi bi-star-fill text-danger fs-5"></i>
+                        JLPT {{ item.kanjiDetails.jlpt }}
+                    </span>
+
+                    <!-- Erreurs -->
+                    <span class="border-start ps-3 ms-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+                        {{ item.errorCount }} {{ 'MY_LEARNING_SPACE.ERRORS' | translate }}
+                    </span>
+
+                    <!-- Flèche + texte -->
+                    <span class="ms-3 d-flex align-items-center gap-1"
+                        [attr.title]="('MY_LEARNING_SPACE.UPDATED_AT' | translate) + (item.updatedAt | date: 'dd/MM/yyyy à HH:mm')">
+                        <i class="bi" [ngClass]="{
+              'bi-arrow-down-circle-fill text-success fs-5': item.inProgress,
+              'bi-arrow-up-circle-fill text-danger fs-5': !item.inProgress
+            }"></i>
+                        <small class="text-nowrap fw-semibold">
+                            {{ item.inProgress ? ('MY_LEARNING_SPACE.DIMINUTION' | translate) :
+                            ('MY_LEARNING_SPACE.AUGMENTATION' | translate) }}
+                        </small>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="text-center text-muted fst-italic mt-5 d-flex justify-content-center align-items-center gap-2">
+        <i class="bi bi-info-circle-fill fs-4"></i>
+        <span>{{ 'MY_LEARNING_SPACE.NO_DATA' | translate }}</span>
+    </div>
+    }
+</section>

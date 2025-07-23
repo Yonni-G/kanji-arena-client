@@ -65,6 +65,16 @@
     "ALERT_OFF": "Je ne suis pas alerté par email dès lors qu’un autre joueur bat mon meilleur score (si je fais partie du TOP 10)",
     "ALERT_ON": "Je suis alerté par email dès lors qu'un autre joueur bat mon meilleur score"
   },
+  "MY_LEARNING_SPACE": {
+    "TITLE": "Mon espace apprenant",
+    "ERRORS": "Erreurs",
+    "SUB_TITLE1": "Voici la liste des Kanji pour lesquels vous avez commis des erreurs lors de vos parties. Les Kanji sont classés par nombre de fautes.",
+    "SUB_TITLE2": "Vous pouvez les réviser directement ici, sur votre espace apprenant. La liste est mise à jour en temps réel après chacune de vos parties.",
+    "UPDATED_AT": "La dernière fois où vous avez rencontré ce Kanji dans un jeu : le ",
+    "DIMINUTION": "En diminution",
+    "AUGMENTATION": "En augmentation",
+    "NO_DATA": "Vous n'avez pas encore de données d'apprentissage. Commencez à jouer pour suivre vos progrès !"
+  },
   "REGISTER": {
     "TITLE": "Inscription",
     "SUBTITLE": "Créez votre compte et rejoignez la Kanji-Arena ! Serez-vous le prochain champion ?",
@@ -170,6 +180,7 @@
     "COMING_SOON": "À venir...",
     "REGISTER": "Inscription",
     "LOGIN": "Connexion",
+    "MY_LEARNING_SPACE" : "Mon espace apprenant",
     "PROFILE": "Mon profil",
     "LOGOUT": "Déconnexion",
     "LANG_FR": "Français",
@@ -200,12 +211,29 @@
     "FORGOT_PASSWORD": "Oubli de mot de passe",
     "RESET_PASSWORD": "Recréez votre mot de passe",
     "PROFILE": "Votre profil",
+    "MY_LEARNING_SPACE": "Mon espace apprenant",
     "CLASSIC": "Jeu Classic mode",
     "CLASSIC_NAME": "Classic",
     "CLASSIC_DESC": "Devinez le sens associé à 10 Kanji le plus rapidement possible",
     "REVERSE": "Jeu Reverse mode",
     "REVERSE_NAME": "Reverse",
     "REVERSE_DESC": "Devinez 10 Kanji associés au sens proposé le + rapidement possible !",
-    "IDEAS": "Idées de prochains jeux"
+    "IDEAS": "Idées de prochains jeux",
+    "META": {
+      "ABOUT": "À propos de Kanji-Arena, plateforme pour apprendre les kanjis via des quiz.",
+      "CONTACT": "Contactez Kanji-Arena pour support ou questions.",
+      "HOME": "Kanji Quiz – Jeux en ligne pour progresser en japonais.",
+      "LOGIN": "Connectez-vous pour accéder à votre compte Kanji Quiz.",
+      "REGISTER": "Créez votre compte pour commencer à jouer.",
+      "FORGOT_PASSWORD": "Réinitialisez votre mot de passe oublié.",
+      "RESET_PASSWORD": "Réinitialisez votre mot de passe en toute sécurité.",
+      "PROFILE": "Gérez votre profil et vos paramètres.",
+      "MY_LEARNING_SPACE": "Regardez des kanjis difficiles et suivez vos progrès.",
+      "CLASSIC": "Mode Classic : devinez le sens de 10 kanjis rapidement.",
+      "REVERSE": "Mode Reverse : associez sens et kanji rapidement.",
+      "IDEAS": "Proposez vos idées de jeux pour Kanji-Arena.",
+      "KEYWORDS_DEFAULT": "kanji, quiz, japonais, apprentissage, kanji-arena, jeu, langues",
+      "KEYWORDS_GAMES": "kanji, quiz kanji, jeux japonais, classico, reverse mode"
+    }
   }
 }

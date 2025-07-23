@@ -37,7 +37,8 @@
         </div>
 
         <!-- NAV RIGHT -->
-        <ul class="navbar-nav ms-auto d-flex flex-column gap-2">
+        <ul class="navbar-nav ms-auto d-flex flex-column gap-2 align-items-end">
+        
           @if (!username) {
           <li class="nav-item">
             <a class="btn btn-outline-final" [routerLink]="['/register']">
@@ -50,47 +51,66 @@
             </a>
           </li>
           } @else {
-          <li class="nav-item">
-            <a class="btn btn-outline-final text-center" [routerLink]="['/dashboard/profile']">
-              <i class="bi bi-person-circle"></i> [ {{ username }} ] {{ 'HEADER.PROFILE' | translate }}
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-final" (click)="logout()">
-              <i class="bi bi-box-arrow-in-left"></i> {{ 'HEADER.LOGOUT' | translate }}
-            </a>
+          <li class="nav-item dropdown">
+            <button class="btn btn-outline-final dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+              <span>[ {{ username }} ]</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/dashboard/my-learning-space']">
+                  <i class="bi bi-book"></i> {{ 'HEADER.MY_LEARNING_SPACE' | translate }}
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/dashboard/profile']">
+                  <i class="bi bi-gear"></i> {{ 'HEADER.PROFILE' | translate }}
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <button class="dropdown-item text-danger" (click)="logout()">
+                  <i class="bi bi-box-arrow-in-left"></i> {{ 'HEADER.LOGOUT' | translate }}
+                </button>
+              </li>
+            </ul>
           </li>
           }
-          <li class="nav-item">
-            <!-- Sélecteur de langue centré sous les boutons -->
-            <div class="w-100 text-center">
-              <div class="dropdown d-inline-block">
-                <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center gap-2" type="button"
-                  id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span [ngClass]="flagClass"></span>
-                  <span class="d-none d-md-inline">{{ langLabel }}</span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="langDropdown">
-                  <li>
-                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"
-                      (click)="setLang('en'); $event.preventDefault()">
-                      <span class="fi fi-gb"></span> English
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"
-                      (click)="setLang('fr'); $event.preventDefault()">
-                      <span class="fi fi-fr"></span> Français
-                    </a>
-                  </li>
-                  <a class="dropdown-item d-flex align-items-center gap-2" href="#" (click)="setLang('ja'); $event.preventDefault()">
+        
+          <li class="nav-item w-100 mt-2 text-center">
+            <div class="dropdown d-inline-block">
+              <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center gap-2" type="button"
+                id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <span [ngClass]="flagClass"></span>
+                <span class="d-none d-md-inline">{{ langLabel }}</span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="#"
+                    (click)="setLang('en'); $event.preventDefault()">
+                    <span class="fi fi-gb"></span> English
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="#"
+                    (click)="setLang('fr'); $event.preventDefault()">
+                    <span class="fi fi-fr"></span> Français
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center gap-2" href="#"
+                    (click)="setLang('ja'); $event.preventDefault()">
                     <span class="fi fi-jp"></span> 日本語
                   </a>
-                </ul>
-              </div>
+                </li>
+              </ul>
             </div>
           </li>
         </ul>
+
       </div>
     </div>
   </nav>

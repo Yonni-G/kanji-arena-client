@@ -7,6 +7,7 @@ import { User } from '../../../models/user';
 import { finalize } from 'rxjs';
 import { LangService } from '../../../services/lang.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { emailValidator } from '../../../validators/emailValidator';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,7 +25,7 @@ export class ForgotPasswordComponent {
   form = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
+      emailValidator(),
     ]),
   });
 
