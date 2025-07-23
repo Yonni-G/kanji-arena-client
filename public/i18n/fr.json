@@ -65,6 +65,16 @@
     "ALERT_OFF": "Je ne suis pas alerté par email dès lors qu’un autre joueur bat mon meilleur score (si je fais partie du TOP 10)",
     "ALERT_ON": "Je suis alerté par email dès lors qu'un autre joueur bat mon meilleur score"
   },
+  "MY_LEARNING_SPACE": {
+    "TITLE": "Mon espace apprenant",
+    "ERRORS": "Erreurs",
+    "SUB_TITLE1": "Voici la liste des Kanji pour lesquels vous avez commis des erreurs lors de vos parties. Les Kanji sont classés par nombre de fautes.",
+    "SUB_TITLE2": "Vous pouvez les réviser directement ici, sur votre espace apprenant. La liste est mise à jour en temps réel après chacune de vos parties.",
+    "UPDATED_AT": "La dernière fois où vous avez rencontré ce Kanji dans un jeu : le ",
+    "DIMINUTION": "En diminution",
+    "AUGMENTATION": "En augmentation",
+    "NO_DATA": "Vous n'avez pas encore de données d'apprentissage. Commencez à jouer pour suivre vos progrès !"
+  },
   "REGISTER": {
     "TITLE": "Inscription",
     "SUBTITLE": "Créez votre compte et rejoignez la Kanji-Arena ! Serez-vous le prochain champion ?",
@@ -201,6 +211,7 @@
     "FORGOT_PASSWORD": "Oubli de mot de passe",
     "RESET_PASSWORD": "Recréez votre mot de passe",
     "PROFILE": "Votre profil",
+    "MY_LEARNING_SPACE": "Mon espace apprenant",
     "CLASSIC": "Jeu Classic mode",
     "CLASSIC_NAME": "Classic",
     "CLASSIC_DESC": "Devinez le sens associé à 10 Kanji le plus rapidement possible",

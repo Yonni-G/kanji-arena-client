@@ -65,6 +65,16 @@
     "ALERT_OFF": "I am not notified by email when another player beats my best score (if I am in the TOP 10)",
     "ALERT_ON": "I am notified by email when another player beats my best score"
   },
+  "MY_LEARNING_SPACE": {
+    "TITLE": "My learning space",
+    "ERRORS": "Errors",
+    "UPDATED_AT": "Last encountered on: ",
+    "DIMINUTION": "Decreasing",
+    "AUGMENTATION": "Increasing",
+    "SUB_TITLE1": "Here is the list of Kanji you have made mistakes on during your games. The Kanji are sorted by the number of errors.",
+    "SUB_TITLE2": "You can review them directly here in your learning space. The list is updated in real-time after each game.",
+    "NO_DATA": "You don't have any learning data yet. Start playing to track your progress!"
+  },
   "REGISTER": {
     "TITLE": "Sign up",
     "SUBTITLE": "Create your account and join Kanji-Arena! Will you be the next champion?",
@@ -201,7 +211,7 @@
     "FORGOT_PASSWORD": "Forgot password",
     "RESET_PASSWORD": "Reset your password",
     "PROFILE": "Your profile",
-    "MY_LEARNING_SPACE" :"My learning space",
+    "MY_LEARNING_SPACE": "My learning space",
     "CLASSIC": "Classic game mode",
     "CLASSIC_NAME": "Classic",
     "CLASSIC_DESC": "Guess the meaning of 10 kanji as quickly as possible",
@@ -218,7 +228,7 @@
       "FORGOT_PASSWORD": "Reset your forgotten password.",
       "RESET_PASSWORD": "Securely reset your password.",
       "PROFILE": "Manage your profile and settings.",
-      "MY_LEARNING_SPACE" : "Watch difficult kanji and track your progress",
+      "MY_LEARNING_SPACE": "Watch difficult kanji and track your progress",
       "CLASSIC": "Classic mode: quickly guess the meaning of 10 kanji.",
       "REVERSE": "Reverse mode: quickly match meanings to kanji.",
       "IDEAS": "Submit your game ideas to improve Kanji-Arena.",

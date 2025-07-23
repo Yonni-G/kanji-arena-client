@@ -7,19 +7,15 @@ import { LangService } from './lang.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiCommonService extends BaseApiService {
+export class ApiMyLearningSpaceService extends BaseApiService {
     private readonly http: HttpClient;
     constructor(http: HttpClient, langService: LangService) {
       super(langService);
       this.http = http;
     }
 
-  // Envoi d'un message de contact
-  sendContactMessage(message: {
-    name: string;
-    email: string;
-    message: string;
-  }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/contact/send`, message);
+  // Récupère les données de l'espace d'apprentissage
+  getMyLearningSpace(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/my-learning-space`);
   }
 }

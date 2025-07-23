@@ -64,7 +64,7 @@ export class LoginComponent {
         .subscribe({
           next: (res) => {
             // Succès
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard/my-learning-space']);
           },
           error: (err) => {
             // Erreur

@@ -2,8 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ApiAuthService } from '../../../services/api.auth.service';
 import { MessageService } from '../../../services/message.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LangService } from '../../../services/lang.service';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-profile',
   imports: [MatSlideToggleModule, TranslateModule],

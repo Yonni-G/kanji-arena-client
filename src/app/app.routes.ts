@@ -5,7 +5,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { ProfileComponent } from './pages/dashboard/profile/profile.component';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { ClassicComponent } from './pages/games/classic/classic.component';
 import { GameLayoutComponent } from './pages/games/game-layout/game-layout.component';
 import { ReverseComponent } from './pages/games/reverse/reverse.component';
@@ -16,6 +16,11 @@ import { AboutComponent } from './pages/about/about.component';
 import { MyLearningSpaceComponent } from './pages/dashboard/my-learning-space/my-learning-space.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'about',
     component: AboutComponent,
@@ -101,7 +106,7 @@ export const routes: Routes = [
         },
       },
     ],
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'games',
