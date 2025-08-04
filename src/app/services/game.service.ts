@@ -46,6 +46,8 @@ export class GameService {
   private _gameMode: GameMode = GameMode.CLASSIC;
   private _gameToken: string | null = null;
   private _card: Card | null = null;
+  private _cards: Card[] = []; // Liste des cartes du jeu
+  private _currentCardIndex: number = 0; // Index de la carte actuelle
   private _listErrors: CardError[] = [];
   listErrors: CardError[] = [];
 
@@ -102,8 +104,7 @@ export class GameService {
               this._feedbackClass = 'correctAnswer';
             } else {
               this._counters.errors++;
-              this._feedbackClass = 'unCorrectAnswer';
-
+              this._feedbackClass = 'unCorrectAnswer';              
               // on collecte les erreurs
               this._listErrors.push({
                 proposal: card?.proposal,
@@ -118,13 +119,14 @@ export class GameService {
             // Étape 2 : laisser apparaître la couleur de feedback
             setTimeout(() => {
               this.isLoading = false;
-              this._card = response.card; // nouvelle carte
+              // si on reçoit d'autres cartes, on les ajoute à la pile
+              this._cards.push(...response.cards);
+              //console.log(this._cards);
+              this._card = this._cards[++this._currentCardIndex] || null; // nouvelle carte de la pile
               this.newCard$.next(); // <-- NOTIFIE le composant qu'une nouvelle carte est affichée
               this._feedbackClass = ''; // reset couleur
               this.loadingCheckState = 'disabled';
-              // Le SCROLL se fait désormais côté composant Angular,
-              // en s'abonnant à newCard$ et en scrolant avec @ViewChild('popo')
-            }, 400); // délai feedback visible (ajustable)
+            }, 200); // délai feedback visible (ajustable)
           },
           error: (err) => {
             console.error('Erreur lors du contrôle de la réponse', err);
@@ -158,7 +160,6 @@ export class GameService {
     this.startGame(this._gameMode, () => {
       this.isLoading = false;
       this.startSubject.next(); // Démarrer le chrono
-      // Le scroll sera déclenché côté composant grâce à newCard$
     });
   }
 
@@ -166,7 +167,8 @@ export class GameService {
   startGame(gameMode: GameMode, onLoaded?: () => void) {
     this.apiGameService.startGame(gameMode, this.jlptStorageService.jlptGrade).subscribe({
       next: (response) => {
-        this._card = response.card;
+        this._cards = response.cards;
+        this._card = this._cards[this._currentCardIndex] || null; // on récupère la première carte de la pile
         this._gameToken = response.gameToken;
         this.newCard$.next(); // <-- NOTIFIE le composant qu'une nouvelle carte est affichée
         if (onLoaded) onLoaded();
@@ -175,7 +177,6 @@ export class GameService {
         console.error('Erreur lors du chargement des cartes classiques:', err);
       },
     });
-    // Plus de scroll ici, c'est désormais le composant qui gère le scroll !
   }
 
   resetGame() {
@@ -184,6 +185,9 @@ export class GameService {
 
     // on réinitialise les données du jeu
     this._card = null;
+    this._cards = []
+    this._currentCardIndex = 0;
+    this._gameToken = null;
 
     this._counters = {
       success: 0,
