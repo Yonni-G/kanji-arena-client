@@ -3,9 +3,9 @@ import { ChronoService } from '../../../services/chrono.service';
 import { ChronoFormatPipe } from '../../../pipes/chrono-format.pipe';
 
 @Component({
-  selector: 'app-chronometer',
-  templateUrl: './chronometer.component.html',
-  styleUrls: ['./chronometer.component.css'],
+  selector: 'app-chronometer-mode',
+  templateUrl: './chronometer-mode.component.html',
+  styleUrls: ['./chronometer-mode.component.css'],
   imports: [ChronoFormatPipe],
 })
 export class ChronometerComponent {
@@ -17,4 +17,5 @@ export class ChronometerComponent {
       this.time = temps;
     });
   }
+
 }

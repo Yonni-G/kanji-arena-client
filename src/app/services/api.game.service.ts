@@ -5,15 +5,21 @@ import { GameMode } from '../models/GameMode';
 import { BaseApiService } from './base-api.service';
 import { LangService } from './lang.service';
 import { JlptGrade } from '../models/JlptGrade';
+import { PracticeModeService } from './practice-mode.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiGameService extends BaseApiService {
   private readonly http: HttpClient;
-  constructor(http: HttpClient, langService: LangService) {
+  private mode: 'chrono' | 'training' = 'chrono';
+  constructor(http: HttpClient, langService: LangService, practiceModeService: PracticeModeService) {
     super(langService);
     this.http = http;
+    // Subscribe to the practice mode service to get the current mode
+    practiceModeService.mode$.subscribe((mode) => {
+      this.mode = mode;
+    });
   }
 
   startGame(gameMode: GameMode, jlptGrade: JlptGrade | null): Observable<any> {
@@ -30,7 +36,7 @@ export class ApiGameService extends BaseApiService {
   ): Observable<any> {
     return this.http.post<any>(
       `${this.apiUrl}/games/${gameMode}/checkAnswer`,
-      { gameToken, choiceIndex },
+      { gameToken, choiceIndex, mode: this.mode },
       { withCredentials: true } // 👈 ajoute les cookies
     );
   }

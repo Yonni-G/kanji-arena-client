@@ -1,0 +1,12 @@
+@if(mode === 'chrono') {
+    <app-chronometer-mode></app-chronometer-mode>
+}
+@if (mode === 'training') {
+<div class="card game-width border-0 shadow-sm mb-3">
+    <div class="card-body text-center py-2 small">
+        <div style="font-size: 2rem;">🧘‍♂️</div>
+        <h5 class="fw-bold text-success mt-3 mb-1">{{ 'GAME.TRAINING' | translate }}</h5>
+        <p class="mb-0 text-muted fst-italic">{{ 'GAME.TRAINING_DESC' | translate }}</p>
+    </div>
+</div>
+}

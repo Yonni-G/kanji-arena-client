@@ -1,0 +1,12 @@
+<div class="btn-group w-100 mb-3" role="group" aria-label="Mode de jeu">
+    <input type="radio" class="btn-check" name="mode" id="chrono" autocomplete="off" (change)="onModeChange(mode)" [(ngModel)]="mode" value="chrono">
+    <label class="btn btn-outline-danger d-flex flex-fill justify-content-center align-items-center gap-2" for="chrono">
+        <i class="bi bi-stopwatch toggle-icon"></i> {{ 'GAME.CHRONO' | translate }}
+    </label>
+
+    <input type="radio" class="btn-check" name="mode" id="training" autocomplete="off" (change)="onModeChange(mode)" [(ngModel)]="mode" value="training">
+    <label class="btn btn-outline-danger d-flex flex-fill justify-content-center align-items-center gap-2"
+        for="training">
+        <i class="bi bi-person-lines-fill toggle-icon"></i> {{ 'GAME.TRAINING' | translate }}
+    </label>
+</div>

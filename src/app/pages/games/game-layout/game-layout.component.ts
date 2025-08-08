@@ -13,16 +13,16 @@ import { ListErrorsComponent } from '../../../components/games/list-errors/list-
 import { GameService } from '../../../services/game.service';
 import { ChronoFormatPipe } from '../../../pipes/chrono-format.pipe';
 import { ModalComponent } from '../../../components/modal/modal.component';
-import { ChronometerComponent } from '../../../components/games/chronometer/chronometer.component';
 import { Card } from '../../../models/Card';
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChronoService } from '../../../services/chrono.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LangService } from '../../../services/lang.service';
+import { TranslateModule } from '@ngx-translate/core';
 import { JlptSelectorComponent } from '../../../components/games/jlpt-selector/jlpt-selector.component';
 import { JlptGrade } from '../../../models/JlptGrade';
 import { JlptStorageService } from '../../../services/jlptStorage.service';
+import { ChronoTrainingSelectorComponent } from "../../../components/games/chrono-training-selector/chrono-training-selector.component";
+import { ChronoTrainingLayoutComponent } from "../../../components/games/chrono-training-layout/chrono-training-layout.component";
 
 @Component({
   selector: 'app-game-layout',
@@ -32,11 +32,12 @@ import { JlptStorageService } from '../../../services/jlptStorage.service';
     ListErrorsComponent,
     ChronoFormatPipe,
     ModalComponent,
-    ChronometerComponent,
     NgClass,
     TranslateModule,
     JlptSelectorComponent,
-  ],
+    ChronoTrainingSelectorComponent,
+    ChronoTrainingLayoutComponent
+],
   templateUrl: './game-layout.component.html',
   styleUrl: './game-layout.component.css',
 })
@@ -53,7 +54,7 @@ export class GameLayoutComponent {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly chronoService: ChronoService,
-    private jlptStorage: JlptStorageService
+    private readonly jlptStorage: JlptStorageService
   ) {
     this.gameService.openModale$.subscribe(() => {
       this.openModal();

@@ -131,6 +131,9 @@
   },
   "GAME": {
     "MODE": "mode",
+    "CHRONO": "Timed mode",
+    "TRAINING": "Training mode",
+    "TRAINING_DESC": "No timer, progress at your own pace!",
     "NOT_AUTH": "You are not logged in!",
     "NOT_SAVED": "Your times will not be saved!",
     "YOUR_TIME": "Your time:",
