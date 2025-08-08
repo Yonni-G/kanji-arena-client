@@ -131,6 +131,9 @@
   },
   "GAME": {
     "MODE": "mode",
+    "CHRONO": "Mode chronométré",
+    "TRAINING": "Mode entraînement",
+    "TRAINING_DESC": "Pas de chrono, progressez à votre rythme !",
     "NOT_AUTH": "Vous n'êtes pas connecté·e !",
     "NOT_SAVED": "Vos chronos ne seront pas enregistrés !",
     "YOUR_TIME": "Votre chrono :",

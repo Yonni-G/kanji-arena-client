@@ -41,6 +41,7 @@
     </section>
 
     <app-jlpt-selector [value]="currentJlpt" (select)="onChangeJlpt($event)"></app-jlpt-selector>
+    <app-chrono-training-selector></app-chrono-training-selector>
 
     <!-- PARTIE HAUTE D'UN JEU -->
     <div id="quiz-card" class="card game-width" [ngClass]="feedbackClass()"
@@ -51,6 +52,11 @@
             <div class="d-flex justify-content-between align-items-center mb-2 position-relative"
                 style="min-height: 100px;">
 
+                <!-- Compteur gauche -->
+                <div class="d-flex justify-content-center align-items-center rounded-circle bg-success text-white fw-bold fs-4"
+                    style="width: 80px; height: 80px;">
+                    {{ counters.success }}/10
+                </div>
 
                 <!-- JLPT cercle CENTRÉ, position absolute -->
                 <div>
@@ -65,13 +71,9 @@
                     </div>
                 </div>
 
-                <!-- Compteur gauche -->
-                <div class="d-flex justify-content-center align-items-center rounded-circle bg-success text-white fw-bold fs-4"
-                    style="width: 80px; height: 80px;">
-                    {{ counters.success }}/10
-                </div>
+
                 <!-- Compteurs droite -->
-                <!-- <div class="d-flex flex-column text-end" style="min-width: 90px;">
+                <div class="d-flex flex-column text-end" style="min-width: 90px;">
                     <span class="badge bg-danger mb-1" style="font-size: 0.9rem;">
                         <i class="bi bi-x-octagon-fill"></i>
                         {{ 'GAME.ERRORS' | translate }} {{ counters.errors }}
@@ -80,14 +82,16 @@
                         <i class="bi bi-list-ol"></i>
                         {{ 'GAME.TOTAL' | translate }} {{ counters.total }}
                     </span>
-                </div> -->
+                </div>
             </div>
 
 
             <hr style="border-top: 1px solid #ccc; margin: 0.3rem 0;">
-            <div class="mt-2 mb-2">
-                <app-chronometer></app-chronometer>
+
+            <div class="mx-2">
+                <app-chrono-training-layout></app-chrono-training-layout>
             </div>
+
             <button type="button" (click)="onStart()" class="btn btn-outline-danger fw-bold w-100">
                 @if(isLoading) {
                 <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
@@ -107,7 +111,7 @@
 <app-list-errors [gameMode]="gameMode"></app-list-errors>
 
 <app-modal [title]="'🎉 ' + ('GAME.FINISHED_TITLE' | translate)" [isOpen]="showModal" (close)="closeModal()">
-    @if (userLiveChrono && userLiveChrono.chronoValue != null && userLiveChrono.ranking != null) {
+
     <div class="text-center px-3">
         <div class="my-3">
             <p class="text-muted mb-0">
@@ -115,7 +119,7 @@
                 counters.total }}
             </p>
         </div>
-        @if(userLiveChrono.chronoValue != null) {
+        @if(userLiveChrono && userLiveChrono.chronoValue != null) {
         <div class="my-3">
             <h5 class="text-primary">{{ 'GAME.TIME_DONE' | translate }}</h5>
             <div class="fs-3 text-danger fw-semibold">
@@ -123,7 +127,7 @@
             </div>
         </div>
         }
-        @if (userLiveChrono.ranking != null) {
+        @if (userLiveChrono && userLiveChrono.ranking != null) {
         <div class="my-3">
             <h5 class="text-primary">{{ 'GAME.YOUR_RANKING' | translate }}</h5>
             <div class="fs-4 fw-bold text-dark">#{{ userLiveChrono.ranking }}</div>
@@ -135,11 +139,12 @@
             <span>{{ 'GAME.CONNECT_TO_SAVE' | translate }}</span>
         </div>
         }
+
         <div class="mt-4 d-flex flex-column gap-2">
             <button class="btn btn-secondary" (click)="closeModal()">
                 {{ 'GAME.CLOSE' | translate }}
             </button>
         </div>
     </div>
-    }
+
 </app-modal>

@@ -80,20 +80,21 @@ export class GameService {
           next: (response) => {
             this._counters.total++;
 
-            // FIN DE PARTIE ?
+            // FIN DE PARTIE chronométrée ?
             if (response.chronoValue) {
               this._userLiveChrono = response;
               // TODO : voir pour ne pas rafraîchir le classement systématiquement
               this.refreshRanking$.next();
-
               // on arrête le chrono
-              this.stopSubject.next();
+              this.stopSubject.next();              
+            }
+            // FIN DE PARTIE training ou chrono ?
+            if (response.chronoValue || response.training) {
               this.loadingCheckState = 'disabled';
               // on affiche les erreurs
               this.listErrors = this._listErrors;
               // ON AFFICHE la modale
               this.openModale$.next();
-
               return;
             }
 
@@ -104,7 +105,7 @@ export class GameService {
               this._feedbackClass = 'correctAnswer';
             } else {
               this._counters.errors++;
-              this._feedbackClass = 'unCorrectAnswer';              
+              this._feedbackClass = 'unCorrectAnswer';
               // on collecte les erreurs
               this._listErrors.push({
                 proposal: card?.proposal,
